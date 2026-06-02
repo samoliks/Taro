@@ -11,22 +11,28 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:   #0d0d0d;
-      --charcoal:#1c1c1c;
-      --mid:     #5a5a5a;
-      --light:   #a8a8a8;
-      --rule:    #e0ddd8;
-      --bg:      #f8f6f2;
-      --white:   #ffffff;
-      --accent:  #3b5c3b;
+      --navy-deep:  #06101e;
+      --navy:       #0b1a2e;
+      --navy-mid:   #122038;
+      --navy-light: #1a3050;
+      --navy-rule:  rgba(255,255,255,0.09);
+      --accent:     #6a9fc0;
+      --accent-dim: rgba(106,159,192,0.18);
+      --white:      #ffffff;
+      --off-white:  #f2f4f7;
+      --muted:      rgba(255,255,255,0.42);
+      --dim:        rgba(255,255,255,0.18);
+      --on-light:   #0b1a2e;
+      --on-light-mid: #3d5168;
+      --on-light-dim: #8099b0;
     }
 
     html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--black);
+      background: var(--navy);
+      color: var(--white);
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
@@ -35,21 +41,19 @@
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.6rem 5vw;
-      border-bottom: 1px solid transparent;
-      transition: background 0.3s, border-color 0.3s;
-      background: rgba(248,246,242,0.92);
-      backdrop-filter: blur(10px);
-      border-bottom-color: var(--rule);
+      padding: 1.5rem 5vw;
+      border-bottom: 1px solid var(--navy-rule);
+      background: rgba(6,16,30,0.88);
+      backdrop-filter: blur(14px);
     }
 
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
+      font-size: 1.45rem;
       font-weight: 400;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--black);
+      color: var(--white);
       text-decoration: none;
     }
 
@@ -61,27 +65,26 @@
     }
 
     nav a {
-      color: var(--mid);
+      color: var(--muted);
       text-decoration: none;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 500;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
 
-    nav a:hover { color: var(--black); }
+    nav a:hover { color: var(--white); }
 
     .nav-cta {
-      color: var(--black) !important;
-      border-bottom: 1px solid var(--black);
+      color: var(--white) !important;
+      border-bottom: 1px solid rgba(255,255,255,0.35);
       padding-bottom: 1px;
     }
 
     /* ── HERO ── */
     #hero {
       height: 100vh;
-      position: relative;
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
@@ -91,40 +94,41 @@
       flex-direction: column;
       justify-content: flex-end;
       padding: 0 5vw 5rem;
-      background: var(--bg);
+      background: var(--navy-deep);
+      position: relative;
       z-index: 1;
     }
 
     .hero-eyebrow {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--light);
+      color: var(--dim);
       font-weight: 500;
       margin-bottom: 2rem;
     }
 
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3rem, 5vw, 4.8rem);
+      font-size: clamp(3rem, 4.5vw, 4.8rem);
       font-weight: 300;
       line-height: 1.1;
-      color: var(--black);
+      color: var(--white);
       margin-bottom: 2.5rem;
     }
 
     .hero-title em {
       font-style: italic;
-      color: var(--mid);
+      color: var(--accent);
     }
 
     .hero-desc {
-      font-size: 0.9rem;
-      color: var(--mid);
+      font-size: 0.88rem;
+      color: var(--muted);
       max-width: 380px;
-      line-height: 1.8;
-      margin-bottom: 3rem;
+      line-height: 1.85;
       font-weight: 300;
+      margin-bottom: 3rem;
     }
 
     .hero-links {
@@ -134,30 +138,30 @@
     }
 
     .link-primary {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 500;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
-      color: var(--black);
+      color: var(--white);
       text-decoration: none;
-      border-bottom: 1px solid var(--black);
+      border-bottom: 1px solid rgba(255,255,255,0.4);
       padding-bottom: 2px;
       transition: opacity 0.2s;
     }
 
-    .link-primary:hover { opacity: 0.5; }
+    .link-primary:hover { opacity: 0.55; }
 
     .link-secondary {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 400;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.13em;
       text-transform: uppercase;
-      color: var(--light);
+      color: var(--dim);
       text-decoration: none;
       transition: color 0.2s;
     }
 
-    .link-secondary:hover { color: var(--mid); }
+    .link-secondary:hover { color: var(--muted); }
 
     .hero-right {
       position: relative;
@@ -168,104 +172,97 @@
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center;
+      object-position: center 30%;
     }
 
-    .hero-right::after {
+    .hero-right::before {
       content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(248,246,242,0.15), transparent);
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to right, rgba(6,16,30,0.35) 0%, transparent 40%);
+    }
+
+    .hero-tag {
+      position: absolute;
+      bottom: 2rem; right: 2rem; z-index: 2;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── STATS STRIP ── */
+    #stats {
+      border-top: 1px solid var(--navy-rule);
+      border-bottom: 1px solid var(--navy-rule);
+      background: var(--navy-mid);
+      padding: 2.2rem 5vw;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    .stat-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      text-align: center;
+      padding: 0 2vw;
+      border-right: 1px solid var(--navy-rule);
+    }
+
+    .stat-item:last-child { border-right: none; }
+
+    .stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--dim);
     }
 
     /* ── SHARED ── */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 5vw;
-    }
-
     .label {
-      font-size: 0.68rem;
-      letter-spacing: 0.2em;
+      font-size: 0.66rem;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--light);
+      color: var(--accent);
       font-weight: 500;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.4rem;
       display: block;
     }
 
     h2 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-size: clamp(2.2rem, 3.8vw, 3.3rem);
       font-weight: 300;
       line-height: 1.15;
-      color: var(--black);
+      color: var(--white);
     }
 
-    h2 em { font-style: italic; color: var(--mid); }
+    h2 em { font-style: italic; color: var(--accent); }
 
     .rule {
-      width: 40px;
+      width: 36px;
       height: 1px;
-      background: var(--rule);
+      background: var(--navy-rule);
       margin: 2.5rem 0;
     }
 
     .body-text {
-      font-size: 0.93rem;
-      color: var(--mid);
+      font-size: 0.9rem;
+      color: var(--muted);
       line-height: 1.9;
       font-weight: 300;
-      max-width: 520px;
-    }
-
-    /* ── INTRO STRIP ── */
-    #intro {
-      border-top: 1px solid var(--rule);
-      border-bottom: 1px solid var(--rule);
-      padding: 2rem 5vw;
-      display: flex;
-      align-items: center;
-      gap: 6vw;
-    }
-
-    .intro-stat {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      flex-shrink: 0;
-    }
-
-    .intro-stat-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2.2rem;
-      font-weight: 300;
-      color: var(--black);
-      line-height: 1;
-    }
-
-    .intro-stat-label {
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--light);
-    }
-
-    .intro-divider {
-      width: 1px;
-      height: 48px;
-      background: var(--rule);
-      flex-shrink: 0;
-    }
-
-    .intro-quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.15rem;
-      font-style: italic;
-      color: var(--mid);
-      font-weight: 300;
-      line-height: 1.6;
-      max-width: 540px;
+      max-width: 500px;
     }
 
     /* ── MISSION ── */
@@ -275,6 +272,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 8vw;
       align-items: center;
+      background: var(--navy-deep);
     }
 
     .mission-image {
@@ -292,20 +290,20 @@
 
     .mission-image:hover img { transform: scale(1.03); }
 
-    .mission-image-caption {
+    .mission-caption {
       position: absolute;
-      bottom: 1.5rem; left: 1.5rem;
-      font-size: 0.68rem;
+      bottom: 1.2rem; left: 1.2rem;
+      font-size: 0.64rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.6);
+      color: rgba(255,255,255,0.38);
     }
 
     /* ── PILLARS ── */
     #pillars {
-      padding: 0 5vw 10rem;
-      border-top: 1px solid var(--rule);
-      padding-top: 6rem;
+      background: var(--navy);
+      padding: 8rem 5vw;
+      border-top: 1px solid var(--navy-rule);
     }
 
     .pillars-header {
@@ -313,7 +311,7 @@
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
       align-items: end;
-      margin-bottom: 6rem;
+      margin-bottom: 5rem;
     }
 
     .pillars-grid {
@@ -326,36 +324,35 @@
       position: relative;
       aspect-ratio: 2/3;
       overflow: hidden;
-      cursor: default;
     }
 
     .pillar img {
       width: 100%; height: 100%;
       object-fit: cover;
       display: block;
-      filter: brightness(0.5) saturate(0.6);
-      transition: filter 0.5s, transform 0.6s;
+      filter: brightness(0.38) saturate(0.5);
+      transition: filter 0.5s, transform 0.65s;
     }
 
     .pillar:hover img {
-      filter: brightness(0.6) saturate(0.75);
+      filter: brightness(0.5) saturate(0.7);
       transform: scale(1.04);
     }
 
     .pillar-content {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       padding: 2.5rem 2rem;
+      background: linear-gradient(to top, rgba(6,16,30,0.85) 0%, transparent 55%);
     }
 
     .pillar-number {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 4rem;
+      font-size: 5rem;
       font-weight: 300;
-      color: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.06);
       line-height: 1;
       margin-bottom: auto;
       padding-top: 2rem;
@@ -363,171 +360,179 @@
 
     .pillar-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.6rem;
+      font-size: 1.55rem;
       font-weight: 400;
       color: var(--white);
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       line-height: 1.2;
     }
 
     .pillar-body {
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      color: var(--muted);
       line-height: 1.7;
       font-weight: 300;
     }
 
     /* ── PROJECTS ── */
     #projects {
-      padding: 0 5vw 10rem;
+      background: var(--off-white);
+      padding: 8rem 5vw;
     }
+
+    #projects .label { color: var(--on-light-dim); }
+    #projects h2 { color: var(--on-light); }
+    #projects h2 em { color: var(--accent); filter: brightness(0.7); }
+    #projects .rule { background: rgba(11,26,46,0.12); }
 
     .projects-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-bottom: 4rem;
+      margin-bottom: 3.5rem;
       padding-bottom: 2rem;
-      border-bottom: 1px solid var(--rule);
+      border-bottom: 1px solid rgba(11,26,46,0.1);
     }
 
-    .projects-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+    .link-dark {
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      color: var(--on-light-dim);
+      text-decoration: none;
+      transition: color 0.2s;
     }
+
+    .link-dark:hover { color: var(--on-light); }
 
     .project-row {
       display: grid;
-      grid-template-columns: 80px 1fr 320px 120px;
+      grid-template-columns: 70px 1fr 300px 80px;
       align-items: center;
       gap: 3rem;
-      padding: 2.2rem 0;
-      border-bottom: 1px solid var(--rule);
+      padding: 2rem 0;
+      border-bottom: 1px solid rgba(11,26,46,0.08);
       text-decoration: none;
       color: inherit;
       transition: background 0.2s;
+      cursor: pointer;
     }
 
-    .project-row:hover { background: rgba(0,0,0,0.02); }
+    .project-row:hover { background: rgba(11,26,46,0.03); }
+    .project-row:hover .proj-arrow { transform: translateX(5px); color: var(--on-light); }
 
-    .project-row:hover .project-arrow { transform: translateX(4px); }
-
-    .project-index {
+    .proj-index {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1rem;
-      color: var(--light);
+      color: var(--on-light-dim);
+      opacity: 0.4;
       font-weight: 300;
     }
 
-    .project-info h3 {
+    .proj-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.4rem;
       font-weight: 400;
-      color: var(--black);
+      color: var(--on-light);
       margin-bottom: 0.2rem;
     }
 
-    .project-info p {
-      font-size: 0.8rem;
-      color: var(--light);
-      letter-spacing: 0.08em;
+    .proj-meta {
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--on-light-dim);
+      text-transform: uppercase;
     }
 
-    .project-desc {
-      font-size: 0.85rem;
-      color: var(--mid);
+    .proj-desc {
+      font-size: 0.83rem;
+      color: var(--on-light-mid);
       line-height: 1.7;
       font-weight: 300;
     }
 
-    .project-arrow {
+    .proj-arrow {
       font-size: 1rem;
-      color: var(--light);
+      color: var(--on-light-dim);
       text-align: right;
-      transition: transform 0.25s;
+      transition: transform 0.25s, color 0.25s;
     }
 
     /* ── CZECHIA ── */
     #czechia {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      min-height: 80vh;
+      min-height: 85vh;
     }
 
-    .czechia-image {
+    .czechia-image-wrap {
       position: relative;
       overflow: hidden;
     }
 
-    .czechia-image img {
+    .czechia-image-wrap img {
       width: 100%; height: 100%;
       object-fit: cover;
       display: block;
-      filter: brightness(0.8) saturate(0.8);
+      object-position: center;
     }
 
-    .czechia-text {
-      background: var(--charcoal);
-      color: var(--white);
+    .czechia-panel {
+      background: var(--navy-mid);
       padding: 8rem 5vw;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      border-left: 1px solid var(--navy-rule);
     }
 
-    .czechia-text .label { color: rgba(255,255,255,0.3); }
-    .czechia-text h2 { color: var(--white); }
-    .czechia-text h2 em { color: rgba(255,255,255,0.4); }
-    .czechia-text .rule { background: rgba(255,255,255,0.15); }
-    .czechia-text .body-text { color: rgba(255,255,255,0.5); }
+    .czechia-panel .rule { background: var(--navy-rule); }
+    .czechia-panel .body-text { max-width: 440px; }
 
     .range-list {
       list-style: none;
-      margin-top: 3rem;
-      display: flex;
-      flex-direction: column;
+      margin-top: 2.5rem;
     }
 
     .range-list li {
       display: flex;
       align-items: baseline;
       gap: 1.2rem;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.45);
+      font-size: 0.83rem;
+      color: var(--muted);
       font-weight: 300;
       padding: 1rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid var(--navy-rule);
       letter-spacing: 0.02em;
     }
 
-    .range-list li span:first-child {
+    .range-list li span {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.2);
+      font-size: 0.7rem;
+      color: var(--dim);
       flex-shrink: 0;
-      width: 20px;
+      width: 18px;
     }
 
     /* ── FOUNDERS ── */
     #founders {
+      background: var(--navy-deep);
       padding: 10rem 5vw;
-      border-top: 1px solid var(--rule);
+      border-top: 1px solid var(--navy-rule);
     }
 
-    .founders-header {
-      margin-bottom: 6rem;
-    }
+    .founders-header { margin-bottom: 6rem; }
 
     .founders-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      gap: 5rem;
     }
 
     .founder-card {
       display: grid;
-      grid-template-columns: 180px 1fr;
+      grid-template-columns: 160px 1fr;
       gap: 2.5rem;
       align-items: start;
     }
@@ -535,40 +540,41 @@
     .founder-photo {
       aspect-ratio: 3/4;
       overflow: hidden;
-      position: relative;
     }
 
     .founder-photo img {
       width: 100%; height: 100%;
       object-fit: cover;
+      object-position: top;
       display: block;
-      filter: grayscale(30%);
+      filter: grayscale(20%) brightness(0.85);
+      transition: filter 0.4s;
     }
 
-    .founder-info {
-      padding-top: 0.5rem;
-    }
+    .founder-photo:hover img { filter: grayscale(0%) brightness(0.9); }
+
+    .founder-info { padding-top: 0.3rem; }
 
     .founder-name {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.5rem;
       font-weight: 400;
-      color: var(--black);
+      color: var(--white);
       margin-bottom: 0.3rem;
     }
 
     .founder-role {
-      font-size: 0.7rem;
-      letter-spacing: 0.16em;
+      font-size: 0.68rem;
+      letter-spacing: 0.17em;
       text-transform: uppercase;
-      color: var(--light);
+      color: var(--accent);
       margin-bottom: 1.5rem;
     }
 
     .founder-bio {
-      font-size: 0.87rem;
-      color: var(--mid);
-      line-height: 1.85;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.9;
       font-weight: 300;
     }
 
@@ -576,37 +582,25 @@
     #cta {
       position: relative;
       overflow: hidden;
-      padding: 12rem 5vw;
+      padding: 14rem 5vw;
       text-align: center;
     }
 
     .cta-bg {
       position: absolute; inset: 0;
       background:
-        linear-gradient(rgba(13,13,13,0.68), rgba(13,13,13,0.68)),
-        url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1800&q=85') center/cover no-repeat;
+        linear-gradient(rgba(6,16,30,0.72), rgba(6,16,30,0.72)),
+        url('https://images.unsplash.com/photo-1589182337358-2cb63099350c?w=1800&q=85') center/cover no-repeat;
     }
 
-    .cta-content {
-      position: relative;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .cta-content .label { color: rgba(255,255,255,0.3); }
-
-    .cta-content h2 {
-      color: var(--white);
-      margin-bottom: 1.5rem;
-    }
-
-    .cta-content h2 em { color: rgba(255,255,255,0.4); }
+    .cta-content { position: relative; max-width: 580px; margin: 0 auto; }
+    .cta-content .label { color: var(--accent); }
 
     .cta-content p {
-      font-size: 0.9rem;
-      color: rgba(255,255,255,0.45);
+      font-size: 0.88rem;
+      color: var(--muted);
       font-weight: 300;
-      line-height: 1.85;
+      line-height: 1.9;
       margin-bottom: 3rem;
     }
 
@@ -619,41 +613,39 @@
 
     .btn-white {
       display: inline-block;
-      padding: 0.9rem 2.5rem;
+      padding: 0.9rem 2.6rem;
       background: var(--white);
-      color: var(--black);
-      font-size: 0.72rem;
+      color: var(--navy-deep);
+      font-size: 0.7rem;
       font-weight: 500;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       text-decoration: none;
       transition: opacity 0.2s;
     }
 
-    .btn-white:hover { opacity: 0.85; }
+    .btn-white:hover { opacity: 0.82; }
 
     .link-ghost {
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       font-weight: 400;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
+      color: var(--dim);
       text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
+      border-bottom: 1px solid var(--navy-rule);
       padding-bottom: 2px;
       transition: color 0.2s, border-color 0.2s;
     }
 
-    .link-ghost:hover {
-      color: rgba(255,255,255,0.8);
-      border-color: rgba(255,255,255,0.5);
-    }
+    .link-ghost:hover { color: var(--muted); border-color: rgba(255,255,255,0.25); }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--black);
-      color: rgba(255,255,255,0.3);
+      background: var(--navy-deep);
+      color: var(--dim);
       padding: 5rem 5vw 3rem;
+      border-top: 1px solid var(--navy-rule);
     }
 
     .footer-top {
@@ -661,14 +653,14 @@
       grid-template-columns: 2fr 1fr 1fr;
       gap: 4rem;
       padding-bottom: 4rem;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid var(--navy-rule);
     }
 
     .footer-brand {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
       font-weight: 300;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--white);
       margin-bottom: 1.2rem;
@@ -676,91 +668,87 @@
 
     .footer-tagline {
       font-size: 0.82rem;
-      line-height: 1.75;
-      max-width: 280px;
+      line-height: 1.8;
+      max-width: 270px;
       font-weight: 300;
     }
 
     .footer-address {
       margin-top: 1.5rem;
       font-size: 0.75rem;
-      line-height: 1.9;
+      line-height: 2;
       letter-spacing: 0.04em;
     }
 
     .footer-col h5 {
-      font-size: 0.67rem;
-      letter-spacing: 0.18em;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
+      color: var(--dim);
       margin-bottom: 1.4rem;
       font-weight: 500;
     }
 
     .footer-col ul { list-style: none; }
-
     .footer-col li { margin-bottom: 0.8rem; }
 
     .footer-col a {
-      color: rgba(255,255,255,0.3);
+      color: var(--dim);
       text-decoration: none;
-      font-size: 0.83rem;
+      font-size: 0.82rem;
       font-weight: 300;
       transition: color 0.2s;
     }
 
-    .footer-col a:hover { color: rgba(255,255,255,0.75); }
+    .footer-col a:hover { color: var(--muted); }
 
     .footer-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding-top: 2.5rem;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       letter-spacing: 0.06em;
     }
 
-    .footer-socials {
-      display: flex;
-      gap: 2rem;
-    }
+    .footer-socials { display: flex; gap: 2rem; }
 
     .footer-socials a {
-      color: rgba(255,255,255,0.25);
+      color: var(--dim);
       text-decoration: none;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
       transition: color 0.2s;
     }
 
-    .footer-socials a:hover { color: rgba(255,255,255,0.6); }
+    .footer-socials a:hover { color: var(--muted); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       #hero { grid-template-columns: 1fr; height: auto; }
-      .hero-left { padding: 10rem 5vw 5rem; min-height: 70vh; }
-      .hero-right { height: 55vw; }
+      .hero-left { padding: 9rem 5vw 5rem; min-height: 65vh; }
+      .hero-right { height: 50vw; }
       #mission { grid-template-columns: 1fr; gap: 4rem; }
       .mission-image { aspect-ratio: 16/9; }
       #czechia { grid-template-columns: 1fr; }
-      .czechia-image { height: 50vw; }
+      .czechia-image-wrap { height: 50vw; }
       .founders-grid { grid-template-columns: 1fr; }
       .pillars-header { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr 1fr; }
-      .project-row { grid-template-columns: 60px 1fr; }
-      .project-desc, .project-arrow { display: none; }
+      .project-row { grid-template-columns: 50px 1fr; }
+      .proj-desc, .proj-arrow { display: none; }
+      #stats { flex-wrap: wrap; gap: 2rem; justify-content: center; }
+      .stat-item { border-right: none; }
     }
 
     @media (max-width: 700px) {
       nav ul { display: none; }
       .pillars-grid { grid-template-columns: 1fr; }
       .founder-card { grid-template-columns: 1fr; }
-      .founder-photo { aspect-ratio: 16/9; }
+      .founder-photo { aspect-ratio: 4/3; }
       .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 1.2rem; }
-      #intro { flex-wrap: wrap; gap: 2rem; }
-      .intro-divider { display: none; }
     }
   </style>
 </head>
@@ -782,7 +770,7 @@
 <!-- HERO -->
 <section id="hero">
   <div class="hero-left">
-    <p class="hero-eyebrow">Fryšták, Czech Republic &nbsp;·&nbsp; Est. 2018</p>
+    <p class="hero-eyebrow">Fryšták, Czech Republic &nbsp;&middot;&nbsp; Est. 2018</p>
     <h1 class="hero-title">
       Protecting<br>mountains.<br>
       <em>Preserving</em><br>cultures.
@@ -796,48 +784,48 @@
     </div>
   </div>
   <div class="hero-right">
+    <!-- Krkonoše mountains, Czech Republic -->
     <img
-      src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1400&q=90"
-      alt="Mountain ridge at dawn"
+      src="https://images.unsplash.com/photo-1568831153277-6862cfdd6547?w=1400&q=90"
+      alt="Krkonoše mountains, Czech Republic"
     />
+    <span class="hero-tag">Krkonoše, Czech Republic</span>
   </div>
 </section>
 
-<!-- INTRO STRIP -->
-<div id="intro">
-  <div class="intro-stat">
-    <span class="intro-stat-number">12</span>
-    <span class="intro-stat-label">Mountain ranges</span>
+<!-- STATS STRIP -->
+<div id="stats">
+  <div class="stat-item">
+    <span class="stat-number">12</span>
+    <span class="stat-label">Mountain ranges</span>
   </div>
-  <div class="intro-divider"></div>
-  <div class="intro-stat">
-    <span class="intro-stat-number">4 800</span>
-    <span class="intro-stat-label">People engaged yearly</span>
+  <div class="stat-item">
+    <span class="stat-number">4 800</span>
+    <span class="stat-label">People engaged yearly</span>
   </div>
-  <div class="intro-divider"></div>
-  <div class="intro-stat">
-    <span class="intro-stat-number">38</span>
-    <span class="intro-stat-label">Active projects</span>
+  <div class="stat-item">
+    <span class="stat-number">38</span>
+    <span class="stat-label">Active projects</span>
   </div>
-  <div class="intro-divider"></div>
-  <div class="intro-stat">
-    <span class="intro-stat-number">97%</span>
-    <span class="intro-stat-label">Funding to programmes</span>
+  <div class="stat-item">
+    <span class="stat-number">3</span>
+    <span class="stat-label">Continents</span>
   </div>
-  <div class="intro-divider"></div>
-  <p class="intro-quote">
-    "Mountains are not conquered — they are understood, lived in, and handed on."
-  </p>
+  <div class="stat-item">
+    <span class="stat-number">97%</span>
+    <span class="stat-label">Funding to programmes</span>
+  </div>
 </div>
 
 <!-- MISSION -->
 <section id="mission">
   <div class="mission-image">
+    <!-- Šumava National Park, Czech Republic -->
     <img
-      src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=900&q=85"
-      alt="Šumava wilderness, Czech Republic"
+      src="https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=900&q=85"
+      alt="Šumava primeval forest, Czech Republic"
     />
-    <span class="mission-image-caption">Šumava National Park, South Bohemia</span>
+    <span class="mission-caption">Šumava National Park, South Bohemia</span>
   </div>
   <div>
     <span class="label">Who We Are</span>
@@ -846,7 +834,7 @@
     <p class="body-text">
       Founded in Fryšták in 2018 and rooted in the foothills of the Beskydy range, Taro was built on a simple conviction: that mountain landscapes and mountain cultures are inseparable. Lose one and you lose the other.
     </p>
-    <p class="body-text" style="margin-top: 1.4rem;">
+    <p class="body-text" style="margin-top:1.4rem;">
       We work at the intersection of environmental science, intangible cultural heritage, and community empowerment — connecting local knowledge in the Czech highlands with global mountain conservation movements from the Andes to the Himalayas.
     </p>
   </div>
@@ -865,9 +853,10 @@
   </div>
   <div class="pillars-grid">
     <div class="pillar">
+      <!-- Beskydy alpine landscape -->
       <img
-        src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=85"
-        alt="Alpine meadow ecosystem"
+        src="https://images.unsplash.com/photo-1596796675810-38bd82f7f877?w=800&q=85"
+        alt="Beskydy mountain meadow, Moravia"
       />
       <div class="pillar-content">
         <span class="pillar-number">01</span>
@@ -876,9 +865,10 @@
       </div>
     </div>
     <div class="pillar">
+      <!-- Czech village / Wallachian cultural heritage -->
       <img
-        src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=85"
-        alt="Mountain winter culture"
+        src="https://images.unsplash.com/photo-1574890396697-d1d33b7e6437?w=800&q=85"
+        alt="Wallachian village, Beskydy"
       />
       <div class="pillar-content">
         <span class="pillar-number">02</span>
@@ -887,9 +877,10 @@
       </div>
     </div>
     <div class="pillar">
+      <!-- Hiking community in Czech mountains -->
       <img
-        src="https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=800&q=85"
-        alt="Community stewardship"
+        src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800&q=85"
+        alt="Mountain community, Czech highlands"
       />
       <div class="pillar-content">
         <span class="pillar-number">03</span>
@@ -907,66 +898,67 @@
       <span class="label">Selected Projects</span>
       <h2>Current <em>field work</em></h2>
     </div>
-    <a href="#cta" class="link-secondary">All projects</a>
+    <a href="#cta" class="link-dark">All projects &rarr;</a>
   </div>
-  <div class="projects-list">
+  <div>
     <a href="#" class="project-row">
-      <span class="project-index">01</span>
-      <div class="project-info">
-        <h3>Krkonoše Alpine Meadow Revival</h3>
-        <p>Czechia &nbsp;·&nbsp; Ecology</p>
+      <span class="proj-index">01</span>
+      <div>
+        <p class="proj-title">Krkonoše Alpine Meadow Revival</p>
+        <p class="proj-meta">Czechia &middot; Ecology</p>
       </div>
-      <p class="project-desc">Rewilding 340 hectares of degraded ridgeline meadows and reintroducing native flora alongside local farming communities.</p>
-      <span class="project-arrow">&#8594;</span>
+      <p class="proj-desc">Rewilding 340 hectares of degraded ridgeline meadows and reintroducing native flora alongside local farming communities.</p>
+      <span class="proj-arrow">&#8594;</span>
     </a>
     <a href="#" class="project-row">
-      <span class="project-index">02</span>
-      <div class="project-info">
-        <h3>Beskydy Living Folklore Archive</h3>
-        <p>Czechia &nbsp;·&nbsp; Culture</p>
+      <span class="proj-index">02</span>
+      <div>
+        <p class="proj-title">Beskydy Living Folklore Archive</p>
+        <p class="proj-meta">Czechia &middot; Culture</p>
       </div>
-      <p class="project-desc">Recording oral histories, songs, and craft techniques from Wallachian mountain communities before they are irretrievably lost.</p>
-      <span class="project-arrow">&#8594;</span>
+      <p class="proj-desc">Recording oral histories, songs, and craft techniques from Wallachian mountain communities before they are irretrievably lost.</p>
+      <span class="proj-arrow">&#8594;</span>
     </a>
     <a href="#" class="project-row">
-      <span class="project-index">03</span>
-      <div class="project-info">
-        <h3>Andean Community Exchange</h3>
-        <p>Peru &nbsp;·&nbsp; Global Partnership</p>
+      <span class="proj-index">03</span>
+      <div>
+        <p class="proj-title">Andean Community Exchange</p>
+        <p class="proj-meta">Peru &middot; Global Partnership</p>
       </div>
-      <p class="project-desc">Connecting Czech mountain farmers with Quechua communities to share climate adaptation knowledge across continents.</p>
-      <span class="project-arrow">&#8594;</span>
+      <p class="proj-desc">Connecting Czech mountain farmers with Quechua communities to share climate adaptation knowledge across continents.</p>
+      <span class="proj-arrow">&#8594;</span>
     </a>
     <a href="#" class="project-row">
-      <span class="project-index">04</span>
-      <div class="project-info">
-        <h3>Šumava Peat Bog Restoration</h3>
-        <p>Czechia &nbsp;·&nbsp; Ecology</p>
+      <span class="proj-index">04</span>
+      <div>
+        <p class="proj-title">Šumava Peat Bog Restoration</p>
+        <p class="proj-meta">Czechia &middot; Ecology</p>
       </div>
-      <p class="project-desc">Rehabilitating drained peat bogs to restore their critical role as carbon sinks and biodiversity refugia.</p>
-      <span class="project-arrow">&#8594;</span>
+      <p class="proj-desc">Rehabilitating drained peat bogs to restore their critical role as carbon sinks and biodiversity refugia.</p>
+      <span class="proj-arrow">&#8594;</span>
     </a>
     <a href="#" class="project-row">
-      <span class="project-index">05</span>
-      <div class="project-info">
-        <h3>Himalayan Dialect Documentation</h3>
-        <p>Nepal &nbsp;·&nbsp; Culture</p>
+      <span class="proj-index">05</span>
+      <div>
+        <p class="proj-title">Himalayan Dialect Documentation</p>
+        <p class="proj-meta">Nepal &middot; Culture</p>
       </div>
-      <p class="project-desc">Partnering with Nepalese linguists to archive endangered mountain languages of the Khumbu region.</p>
-      <span class="project-arrow">&#8594;</span>
+      <p class="proj-desc">Partnering with Nepalese linguists to archive endangered mountain languages of the Khumbu region.</p>
+      <span class="proj-arrow">&#8594;</span>
     </a>
   </div>
 </section>
 
 <!-- CZECHIA -->
 <section id="czechia">
-  <div class="czechia-image">
+  <div class="czechia-image-wrap">
+    <!-- Beskydy hills, Moravia — near Fryšták -->
     <img
-      src="https://images.unsplash.com/photo-1541849546-216549ae216d?w=1000&q=85"
-      alt="Beskydy mountains, Moravia"
+      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1000&q=85"
+      alt="Beskydy hills, Zlínský kraj"
     />
   </div>
-  <div class="czechia-text">
+  <div class="czechia-panel">
     <span class="label">Our Home</span>
     <h2>Rooted in<br><em>Moravian</em> hills</h2>
     <div class="rule"></div>
@@ -974,11 +966,11 @@
       Based in Fryšták — a small town in the Zlín region at the foot of the Beskydy range — Taro was shaped by the landscapes immediately outside its door. Czech mountain ranges are modest in elevation but immensely rich in biodiversity, folklore, and identity.
     </p>
     <ul class="range-list">
-      <li><span>I</span> Krkonoše — Bohemian Giant Mountains, UNESCO Biosphere Reserve</li>
-      <li><span>II</span> Šumava — Europe's largest contiguous forest, vital peat bogs</li>
-      <li><span>III</span> Beskydy — Carpathian foothills with Wallachian pastoral culture</li>
-      <li><span>IV</span> Jeseníky — Silesian highlands and rare glacial relict species</li>
-      <li><span>V</span> Česká Švýcarsko — Sandstone canyon country of North Bohemia</li>
+      <li><span>I</span>Krkonoše — Bohemian Giant Mountains, UNESCO Biosphere Reserve</li>
+      <li><span>II</span>Šumava — Europe's largest contiguous forest, vital peat bogs</li>
+      <li><span>III</span>Beskydy — Carpathian foothills with Wallachian pastoral culture</li>
+      <li><span>IV</span>Jeseníky — Silesian highlands and rare glacial relict species</li>
+      <li><span>V</span>Česká Švýcarsko — Sandstone canyon country of North Bohemia</li>
     </ul>
   </div>
 </section>
@@ -993,7 +985,7 @@
     <div class="founder-card">
       <div class="founder-photo">
         <img
-          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=85"
+          src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?w=400&q=85"
           alt="Daniel Štorcel"
         />
       </div>
@@ -1008,7 +1000,7 @@
     <div class="founder-card">
       <div class="founder-photo">
         <img
-          src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&q=85"
+          src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?w=400&q=85"
           alt="Samuel Holík"
         />
       </div>
