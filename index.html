@@ -17,7 +17,6 @@
       --navy-light: #1a3050;
       --navy-rule:  rgba(255,255,255,0.09);
       --accent:     #6a9fc0;
-      --accent-dim: rgba(106,159,192,0.18);
       --white:      #ffffff;
       --off-white:  #f2f4f7;
       --muted:      rgba(255,255,255,0.42);
@@ -27,8 +26,7 @@
       --on-light-dim: #8099b0;
     }
 
-    html { scroll-behavior: smooth; font-size: 16px; }
-
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', sans-serif;
       background: var(--navy);
@@ -43,44 +41,24 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.5rem 5vw;
       border-bottom: 1px solid var(--navy-rule);
-      background: rgba(6,16,30,0.88);
+      background: rgba(6,16,30,0.9);
       backdrop-filter: blur(14px);
     }
-
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.45rem;
-      font-weight: 400;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--white);
-      text-decoration: none;
+      font-size: 1.45rem; font-weight: 400;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--white); text-decoration: none;
     }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      gap: 2.8rem;
-      align-items: center;
-    }
-
+    nav ul { list-style: none; display: flex; gap: 2.8rem; align-items: center; }
     nav a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
+      color: var(--muted); text-decoration: none;
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase;
       transition: color 0.2s;
     }
-
     nav a:hover { color: var(--white); }
-
-    .nav-cta {
-      color: var(--white) !important;
-      border-bottom: 1px solid rgba(255,255,255,0.35);
-      padding-bottom: 1px;
-    }
+    .nav-cta { color: var(--white) !important; border-bottom: 1px solid rgba(255,255,255,0.35); padding-bottom: 1px; }
 
     /* ── HERO ── */
     #hero {
@@ -88,106 +66,55 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
     }
-
     .hero-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      display: flex; flex-direction: column; justify-content: flex-end;
       padding: 0 5vw 5rem;
       background: var(--navy-deep);
-      position: relative;
-      z-index: 1;
+      position: relative; z-index: 1;
     }
-
     .hero-eyebrow {
-      font-size: 0.68rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--dim);
-      font-weight: 500;
-      margin-bottom: 2rem;
+      font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--dim); font-weight: 500; margin-bottom: 2rem;
     }
-
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(3rem, 4.5vw, 4.8rem);
-      font-weight: 300;
-      line-height: 1.1;
-      color: var(--white);
-      margin-bottom: 2.5rem;
+      font-weight: 300; line-height: 1.1;
+      color: var(--white); margin-bottom: 2.5rem;
     }
-
-    .hero-title em {
-      font-style: italic;
-      color: var(--accent);
-    }
-
+    .hero-title em { font-style: italic; color: var(--accent); }
     .hero-desc {
-      font-size: 0.88rem;
-      color: var(--muted);
-      max-width: 380px;
-      line-height: 1.85;
-      font-weight: 300;
-      margin-bottom: 3rem;
+      font-size: 0.88rem; color: var(--muted);
+      max-width: 380px; line-height: 1.85;
+      font-weight: 300; margin-bottom: 3rem;
     }
-
-    .hero-links {
-      display: flex;
-      gap: 2.5rem;
-      align-items: center;
-    }
-
+    .hero-links { display: flex; gap: 2.5rem; align-items: center; }
     .link-primary {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--white);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.4);
-      padding-bottom: 2px;
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--white); text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 2px;
       transition: opacity 0.2s;
     }
-
     .link-primary:hover { opacity: 0.55; }
-
     .link-secondary {
-      font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-      color: var(--dim);
-      text-decoration: none;
-      transition: color 0.2s;
+      font-size: 0.7rem; letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--dim); text-decoration: none; transition: color 0.2s;
     }
-
     .link-secondary:hover { color: var(--muted); }
-
-    .hero-right {
-      position: relative;
-      overflow: hidden;
-    }
-
+    .hero-right { position: relative; overflow: hidden; }
     .hero-right img {
       position: absolute; inset: 0;
       width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: center 30%;
+      object-fit: cover; object-position: center 30%;
     }
-
     .hero-right::before {
-      content: '';
-      position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(to right, rgba(6,16,30,0.35) 0%, transparent 40%);
+      content: ''; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to right, rgba(6,16,30,0.3) 0%, transparent 40%);
     }
-
     .hero-tag {
-      position: absolute;
-      bottom: 2rem; right: 2rem; z-index: 2;
-      font-size: 0.65rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
+      position: absolute; bottom: 2rem; right: 2rem; z-index: 2;
+      font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
     }
 
     /* ── STATS STRIP ── */
@@ -196,107 +123,73 @@
       border-bottom: 1px solid var(--navy-rule);
       background: var(--navy-mid);
       padding: 2.2rem 5vw;
-      display: flex;
-      align-items: center;
-      gap: 0;
+      display: flex; align-items: center;
     }
-
     .stat-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.3rem;
-      text-align: center;
+      flex: 1; display: flex; flex-direction: column;
+      align-items: center; gap: 0.3rem; text-align: center;
       padding: 0 2vw;
       border-right: 1px solid var(--navy-rule);
     }
-
     .stat-item:last-child { border-right: none; }
-
     .stat-number {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.4rem;
-      font-weight: 300;
-      color: var(--white);
-      line-height: 1;
+      font-size: 2.4rem; font-weight: 300;
+      color: var(--white); line-height: 1;
     }
-
-    .stat-label {
-      font-size: 0.66rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--dim);
-    }
+    .stat-label { font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--dim); }
 
     /* ── SHARED ── */
     .label {
-      font-size: 0.66rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 500;
-      margin-bottom: 1.4rem;
-      display: block;
+      font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); font-weight: 500; margin-bottom: 1.4rem; display: block;
     }
-
     h2 {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(2.2rem, 3.8vw, 3.3rem);
-      font-weight: 300;
-      line-height: 1.15;
-      color: var(--white);
+      font-weight: 300; line-height: 1.15; color: var(--white);
     }
-
     h2 em { font-style: italic; color: var(--accent); }
-
-    .rule {
-      width: 36px;
-      height: 1px;
-      background: var(--navy-rule);
-      margin: 2.5rem 0;
-    }
-
-    .body-text {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.9;
-      font-weight: 300;
-      max-width: 500px;
-    }
+    .rule { width: 36px; height: 1px; background: var(--navy-rule); margin: 2.5rem 0; }
+    .body-text { font-size: 0.9rem; color: var(--muted); line-height: 1.9; font-weight: 300; max-width: 500px; }
 
     /* ── MISSION ── */
     #mission {
       padding: 10rem 5vw;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8vw;
-      align-items: center;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8vw; align-items: center;
       background: var(--navy-deep);
     }
-
-    .mission-image {
-      position: relative;
-      aspect-ratio: 3/4;
-      overflow: hidden;
-    }
-
+    .mission-image { position: relative; aspect-ratio: 3/4; overflow: hidden; }
     .mission-image img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
+      width: 100%; height: 100%; object-fit: cover; display: block;
       transition: transform 0.7s ease;
     }
-
     .mission-image:hover img { transform: scale(1.03); }
-
     .mission-caption {
-      position: absolute;
-      bottom: 1.2rem; left: 1.2rem;
-      font-size: 0.64rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      position: absolute; bottom: 1.2rem; left: 1.2rem;
+      font-size: 0.63rem; letter-spacing: 0.12em; text-transform: uppercase;
       color: rgba(255,255,255,0.38);
+    }
+
+    /* ── PHOTO STRIP (full-bleed 4-across) ── */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      height: 340px;
+      gap: 2px;
+    }
+    .photo-strip-item { position: relative; overflow: hidden; }
+    .photo-strip-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.6s ease, filter 0.4s;
+      filter: brightness(0.78) saturate(0.75);
+    }
+    .photo-strip-item:hover img { transform: scale(1.06); filter: brightness(0.9) saturate(0.9); }
+    .photo-strip-item span {
+      position: absolute; bottom: 1rem; left: 1rem;
+      font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); pointer-events: none;
     }
 
     /* ── PILLARS ── */
@@ -305,158 +198,142 @@
       padding: 8rem 5vw;
       border-top: 1px solid var(--navy-rule);
     }
-
     .pillars-header {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: end;
-      margin-bottom: 5rem;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: end; margin-bottom: 5rem;
     }
-
-    .pillars-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-    }
-
-    .pillar {
-      position: relative;
-      aspect-ratio: 2/3;
-      overflow: hidden;
-    }
-
+    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .pillar { position: relative; aspect-ratio: 2/3; overflow: hidden; }
     .pillar img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
+      width: 100%; height: 100%; object-fit: cover; display: block;
       filter: brightness(0.38) saturate(0.5);
       transition: filter 0.5s, transform 0.65s;
     }
-
-    .pillar:hover img {
-      filter: brightness(0.5) saturate(0.7);
-      transform: scale(1.04);
-    }
-
+    .pillar:hover img { filter: brightness(0.5) saturate(0.7); transform: scale(1.04); }
     .pillar-content {
-      position: absolute; inset: 0;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 2.5rem 2rem;
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 2.5rem 2rem;
       background: linear-gradient(to top, rgba(6,16,30,0.85) 0%, transparent 55%);
     }
-
     .pillar-number {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 5rem;
-      font-weight: 300;
-      color: rgba(255,255,255,0.06);
-      line-height: 1;
-      margin-bottom: auto;
-      padding-top: 2rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 5rem;
+      font-weight: 300; color: rgba(255,255,255,0.06);
+      line-height: 1; margin-bottom: auto; padding-top: 2rem;
     }
-
     .pillar-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.55rem;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 0.5rem;
-      line-height: 1.2;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.55rem;
+      font-weight: 400; color: var(--white); margin-bottom: 0.5rem; line-height: 1.2;
     }
+    .pillar-body { font-size: 0.8rem; color: var(--muted); line-height: 1.7; font-weight: 300; }
 
-    .pillar-body {
-      font-size: 0.8rem;
-      color: var(--muted);
-      line-height: 1.7;
-      font-weight: 300;
+    /* ── EDITORIAL SPLIT (image left, text right) ── */
+    .editorial-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
     }
+    .editorial-image { position: relative; overflow: hidden; }
+    .editorial-image img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.7s;
+    }
+    .editorial-image:hover img { transform: scale(1.03); }
+    .editorial-image span {
+      position: absolute; bottom: 1.2rem; left: 1.4rem;
+      font-size: 0.62rem; letter-spacing: 0.13em; text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+    }
+    .editorial-text {
+      background: var(--navy-mid);
+      padding: 6rem 5vw;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .editorial-text .body-text { margin-top: 1rem; }
+    .editorial-text .body-text + .body-text { margin-top: 1.2rem; }
 
     /* ── PROJECTS ── */
     #projects {
       background: var(--off-white);
       padding: 8rem 5vw;
     }
-
     #projects .label { color: var(--on-light-dim); }
     #projects h2 { color: var(--on-light); }
-    #projects h2 em { color: var(--accent); filter: brightness(0.7); }
+    #projects h2 em { color: #3a6a8a; }
     #projects .rule { background: rgba(11,26,46,0.12); }
-
     .projects-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 3.5rem;
-      padding-bottom: 2rem;
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 3.5rem; padding-bottom: 2rem;
       border-bottom: 1px solid rgba(11,26,46,0.1);
     }
-
     .link-dark {
-      font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.13em;
-      text-transform: uppercase;
-      color: var(--on-light-dim);
-      text-decoration: none;
-      transition: color 0.2s;
+      font-size: 0.7rem; letter-spacing: 0.13em; text-transform: uppercase;
+      color: var(--on-light-dim); text-decoration: none; transition: color 0.2s;
     }
-
     .link-dark:hover { color: var(--on-light); }
 
-    .project-row {
+    /* Project cards with images */
+    .project-cards {
       display: grid;
-      grid-template-columns: 70px 1fr 300px 80px;
-      align-items: center;
-      gap: 3rem;
-      padding: 2rem 0;
-      border-bottom: 1px solid rgba(11,26,46,0.08);
-      text-decoration: none;
-      color: inherit;
-      transition: background 0.2s;
-      cursor: pointer;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-bottom: 2px;
     }
-
-    .project-row:hover { background: rgba(11,26,46,0.03); }
-    .project-row:hover .proj-arrow { transform: translateX(5px); color: var(--on-light); }
-
-    .proj-index {
+    .project-cards-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .proj-card {
+      position: relative; overflow: hidden;
+      aspect-ratio: 4/3;
+      text-decoration: none; color: inherit;
+      display: block;
+    }
+    .proj-card.tall { aspect-ratio: 3/4; }
+    .proj-card img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: brightness(0.45) saturate(0.55);
+      transition: filter 0.4s, transform 0.55s;
+    }
+    .proj-card:hover img { filter: brightness(0.58) saturate(0.7); transform: scale(1.04); }
+    .proj-card-body {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 2rem 1.8rem;
+      background: linear-gradient(to top, rgba(6,16,30,0.9) 0%, transparent 100%);
+    }
+    .proj-tag {
+      font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.4rem; display: block;
+    }
+    .proj-card h3 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      color: var(--on-light-dim);
-      opacity: 0.4;
-      font-weight: 300;
+      font-size: 1.25rem; font-weight: 400; color: var(--white); line-height: 1.25;
+      margin-bottom: 0.35rem;
+    }
+    .proj-card p {
+      font-size: 0.78rem; color: var(--muted); line-height: 1.65; font-weight: 300;
     }
 
-    .proj-title {
+    /* ── WIDE PHOTO ── */
+    .wide-photo {
+      position: relative; height: 480px; overflow: hidden;
+    }
+    .wide-photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: brightness(0.6) saturate(0.7);
+      transition: transform 8s ease;
+    }
+    .wide-photo:hover img { transform: scale(1.04); }
+    .wide-photo-caption {
+      position: absolute; bottom: 2rem; left: 5vw;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.4rem;
-      font-weight: 400;
-      color: var(--on-light);
-      margin-bottom: 0.2rem;
+      font-size: 1.8rem; font-weight: 300; font-style: italic;
+      color: rgba(255,255,255,0.7); max-width: 520px; line-height: 1.3;
     }
-
-    .proj-meta {
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      color: var(--on-light-dim);
-      text-transform: uppercase;
-    }
-
-    .proj-desc {
-      font-size: 0.83rem;
-      color: var(--on-light-mid);
-      line-height: 1.7;
-      font-weight: 300;
-    }
-
-    .proj-arrow {
-      font-size: 1rem;
-      color: var(--on-light-dim);
-      text-align: right;
-      transition: transform 0.25s, color 0.25s;
+    .wide-photo-tag {
+      position: absolute; bottom: 2.2rem; right: 5vw;
+      font-size: 0.63rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
     }
 
     /* ── CZECHIA ── */
@@ -465,54 +342,48 @@
       grid-template-columns: 1fr 1fr;
       min-height: 85vh;
     }
-
-    .czechia-image-wrap {
-      position: relative;
-      overflow: hidden;
-    }
-
+    .czechia-image-wrap { position: relative; overflow: hidden; }
     .czechia-image-wrap img {
       width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
-      object-position: center;
+      object-fit: cover; display: block; object-position: center;
     }
-
     .czechia-panel {
       background: var(--navy-mid);
       padding: 8rem 5vw;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      display: flex; flex-direction: column; justify-content: center;
       border-left: 1px solid var(--navy-rule);
     }
-
     .czechia-panel .rule { background: var(--navy-rule); }
-    .czechia-panel .body-text { max-width: 440px; }
-
-    .range-list {
-      list-style: none;
-      margin-top: 2.5rem;
-    }
-
+    .range-list { list-style: none; margin-top: 2.5rem; }
     .range-list li {
-      display: flex;
-      align-items: baseline;
-      gap: 1.2rem;
-      font-size: 0.83rem;
-      color: var(--muted);
-      font-weight: 300;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--navy-rule);
-      letter-spacing: 0.02em;
+      display: flex; align-items: baseline; gap: 1.2rem;
+      font-size: 0.83rem; color: var(--muted); font-weight: 300;
+      padding: 1rem 0; border-bottom: 1px solid var(--navy-rule); letter-spacing: 0.02em;
+    }
+    .range-list li span {
+      font-family: 'Cormorant Garamond', serif; font-size: 0.7rem;
+      color: var(--dim); flex-shrink: 0; width: 18px;
     }
 
-    .range-list li span {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.7rem;
-      color: var(--dim);
-      flex-shrink: 0;
-      width: 18px;
+    /* ── MOSAIC ── */
+    .mosaic {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 260px 260px;
+      gap: 2px;
+    }
+    .mosaic-item { position: relative; overflow: hidden; }
+    .mosaic-item.tall { grid-row: 1 / 3; }
+    .mosaic-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: brightness(0.72) saturate(0.7);
+      transition: transform 0.6s, filter 0.4s;
+    }
+    .mosaic-item:hover img { transform: scale(1.05); filter: brightness(0.85) saturate(0.85); }
+    .mosaic-item span {
+      position: absolute; bottom: 1rem; left: 1rem;
+      font-size: 0.6rem; letter-spacing: 0.13em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
     }
 
     /* ── FOUNDERS ── */
@@ -521,207 +392,81 @@
       padding: 10rem 5vw;
       border-top: 1px solid var(--navy-rule);
     }
-
     .founders-header { margin-bottom: 6rem; }
-
-    .founders-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-    }
-
-    .founder-card {
-      display: grid;
-      grid-template-columns: 160px 1fr;
-      gap: 2.5rem;
-      align-items: start;
-    }
-
-    .founder-photo {
-      aspect-ratio: 3/4;
-      overflow: hidden;
-    }
-
+    .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+    .founder-card { display: grid; grid-template-columns: 180px 1fr; gap: 2.5rem; align-items: start; }
+    .founder-photo { aspect-ratio: 3/4; overflow: hidden; }
     .founder-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      object-position: top;
-      display: block;
-      filter: grayscale(20%) brightness(0.85);
-      transition: filter 0.4s;
+      width: 100%; height: 100%; object-fit: cover; object-position: top; display: block;
+      filter: grayscale(20%) brightness(0.85); transition: filter 0.4s;
     }
-
-    .founder-photo:hover img { filter: grayscale(0%) brightness(0.9); }
-
+    .founder-photo:hover img { filter: grayscale(0%) brightness(0.92); }
     .founder-info { padding-top: 0.3rem; }
-
-    .founder-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem;
-      font-weight: 400;
-      color: var(--white);
-      margin-bottom: 0.3rem;
-    }
-
-    .founder-role {
-      font-size: 0.68rem;
-      letter-spacing: 0.17em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-    }
-
-    .founder-bio {
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.9;
-      font-weight: 300;
-    }
+    .founder-name { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 400; color: var(--white); margin-bottom: 0.3rem; }
+    .founder-role { font-size: 0.68rem; letter-spacing: 0.17em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.5rem; }
+    .founder-bio { font-size: 0.85rem; color: var(--muted); line-height: 1.9; font-weight: 300; }
 
     /* ── CTA ── */
-    #cta {
-      position: relative;
-      overflow: hidden;
-      padding: 14rem 5vw;
-      text-align: center;
-    }
-
+    #cta { position: relative; overflow: hidden; padding: 14rem 5vw; text-align: center; }
     .cta-bg {
       position: absolute; inset: 0;
       background:
-        linear-gradient(rgba(6,16,30,0.72), rgba(6,16,30,0.72)),
+        linear-gradient(rgba(6,16,30,0.7), rgba(6,16,30,0.7)),
         url('https://images.unsplash.com/photo-1589182337358-2cb63099350c?w=1800&q=85') center/cover no-repeat;
     }
-
     .cta-content { position: relative; max-width: 580px; margin: 0 auto; }
-    .cta-content .label { color: var(--accent); }
-
-    .cta-content p {
-      font-size: 0.88rem;
-      color: var(--muted);
-      font-weight: 300;
-      line-height: 1.9;
-      margin-bottom: 3rem;
-    }
-
-    .cta-actions {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      align-items: center;
-    }
-
+    .cta-content p { font-size: 0.88rem; color: var(--muted); font-weight: 300; line-height: 1.9; margin-bottom: 3rem; }
+    .cta-actions { display: flex; justify-content: center; gap: 3rem; align-items: center; }
     .btn-white {
-      display: inline-block;
-      padding: 0.9rem 2.6rem;
-      background: var(--white);
-      color: var(--navy-deep);
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: opacity 0.2s;
+      display: inline-block; padding: 0.9rem 2.6rem;
+      background: var(--white); color: var(--navy-deep);
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+      text-decoration: none; transition: opacity 0.2s;
     }
-
     .btn-white:hover { opacity: 0.82; }
-
     .link-ghost {
-      font-size: 0.7rem;
-      font-weight: 400;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--dim);
-      text-decoration: none;
-      border-bottom: 1px solid var(--navy-rule);
-      padding-bottom: 2px;
+      font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--dim); text-decoration: none;
+      border-bottom: 1px solid var(--navy-rule); padding-bottom: 2px;
       transition: color 0.2s, border-color 0.2s;
     }
-
     .link-ghost:hover { color: var(--muted); border-color: rgba(255,255,255,0.25); }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--navy-deep);
-      color: var(--dim);
+      background: var(--navy-deep); color: var(--dim);
       padding: 5rem 5vw 3rem;
       border-top: 1px solid var(--navy-rule);
     }
-
     .footer-top {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 4rem;
-      padding-bottom: 4rem;
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem; padding-bottom: 4rem;
       border-bottom: 1px solid var(--navy-rule);
     }
-
     .footer-brand {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.35rem;
-      font-weight: 300;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--white);
-      margin-bottom: 1.2rem;
+      font-family: 'Cormorant Garamond', serif; font-size: 1.35rem;
+      font-weight: 300; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--white); margin-bottom: 1.2rem;
     }
-
-    .footer-tagline {
-      font-size: 0.82rem;
-      line-height: 1.8;
-      max-width: 270px;
-      font-weight: 300;
-    }
-
-    .footer-address {
-      margin-top: 1.5rem;
-      font-size: 0.75rem;
-      line-height: 2;
-      letter-spacing: 0.04em;
-    }
-
+    .footer-tagline { font-size: 0.82rem; line-height: 1.8; max-width: 270px; font-weight: 300; }
+    .footer-address { margin-top: 1.5rem; font-size: 0.75rem; line-height: 2; letter-spacing: 0.04em; }
     .footer-col h5 {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--dim);
-      margin-bottom: 1.4rem;
-      font-weight: 500;
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--dim); margin-bottom: 1.4rem; font-weight: 500;
     }
-
     .footer-col ul { list-style: none; }
     .footer-col li { margin-bottom: 0.8rem; }
-
-    .footer-col a {
-      color: var(--dim);
-      text-decoration: none;
-      font-size: 0.82rem;
-      font-weight: 300;
-      transition: color 0.2s;
-    }
-
+    .footer-col a { color: var(--dim); text-decoration: none; font-size: 0.82rem; font-weight: 300; transition: color 0.2s; }
     .footer-col a:hover { color: var(--muted); }
-
     .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 2.5rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.06em;
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 2.5rem; font-size: 0.7rem; letter-spacing: 0.06em;
     }
-
     .footer-socials { display: flex; gap: 2rem; }
-
     .footer-socials a {
-      color: var(--dim);
-      text-decoration: none;
-      font-size: 0.7rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      transition: color 0.2s;
+      color: var(--dim); text-decoration: none; font-size: 0.7rem;
+      letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s;
     }
-
     .footer-socials a:hover { color: var(--muted); }
 
     /* ── RESPONSIVE ── */
@@ -731,22 +476,30 @@
       .hero-right { height: 50vw; }
       #mission { grid-template-columns: 1fr; gap: 4rem; }
       .mission-image { aspect-ratio: 16/9; }
+      .photo-strip { grid-template-columns: repeat(2, 1fr); height: auto; }
+      .photo-strip-item { height: 220px; }
+      .pillars-header { grid-template-columns: 1fr; }
+      .editorial-split { grid-template-columns: 1fr; }
+      .editorial-image { height: 50vw; }
+      .project-cards { grid-template-columns: 1fr 1fr; }
+      .project-cards-bottom { grid-template-columns: 1fr; }
       #czechia { grid-template-columns: 1fr; }
       .czechia-image-wrap { height: 50vw; }
+      .mosaic { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .mosaic-item.tall { grid-row: auto; }
       .founders-grid { grid-template-columns: 1fr; }
-      .pillars-header { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr 1fr; }
-      .project-row { grid-template-columns: 50px 1fr; }
-      .proj-desc, .proj-arrow { display: none; }
       #stats { flex-wrap: wrap; gap: 2rem; justify-content: center; }
       .stat-item { border-right: none; }
     }
-
     @media (max-width: 700px) {
       nav ul { display: none; }
       .pillars-grid { grid-template-columns: 1fr; }
+      .project-cards { grid-template-columns: 1fr; }
       .founder-card { grid-template-columns: 1fr; }
       .founder-photo { aspect-ratio: 4/3; }
+      .mosaic { grid-template-columns: 1fr; }
+      .photo-strip { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 1.2rem; }
     }
@@ -784,7 +537,6 @@
     </div>
   </div>
   <div class="hero-right">
-    <!-- Krkonoše mountains, Czech Republic -->
     <img
       src="https://images.unsplash.com/photo-1568831153277-6862cfdd6547?w=1400&q=90"
       alt="Krkonoše mountains, Czech Republic"
@@ -795,32 +547,16 @@
 
 <!-- STATS STRIP -->
 <div id="stats">
-  <div class="stat-item">
-    <span class="stat-number">12</span>
-    <span class="stat-label">Mountain ranges</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">4 800</span>
-    <span class="stat-label">People engaged yearly</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">38</span>
-    <span class="stat-label">Active projects</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">3</span>
-    <span class="stat-label">Continents</span>
-  </div>
-  <div class="stat-item">
-    <span class="stat-number">97%</span>
-    <span class="stat-label">Funding to programmes</span>
-  </div>
+  <div class="stat-item"><span class="stat-number">12</span><span class="stat-label">Mountain ranges</span></div>
+  <div class="stat-item"><span class="stat-number">4 800</span><span class="stat-label">People engaged yearly</span></div>
+  <div class="stat-item"><span class="stat-number">38</span><span class="stat-label">Active projects</span></div>
+  <div class="stat-item"><span class="stat-number">3</span><span class="stat-label">Continents</span></div>
+  <div class="stat-item"><span class="stat-number">97%</span><span class="stat-label">Funding to programmes</span></div>
 </div>
 
 <!-- MISSION -->
 <section id="mission">
   <div class="mission-image">
-    <!-- Šumava National Park, Czech Republic -->
     <img
       src="https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=900&q=85"
       alt="Šumava primeval forest, Czech Republic"
@@ -840,6 +576,26 @@
   </div>
 </section>
 
+<!-- PHOTO STRIP 1 — Czech landscapes -->
+<div class="photo-strip">
+  <div class="photo-strip-item">
+    <img src="https://images.unsplash.com/photo-1570181567841-8b194a1d76a1?w=700&q=85" alt="Krkonoše ridge, Czech Republic" />
+    <span>Krkonoše</span>
+  </div>
+  <div class="photo-strip-item">
+    <img src="https://images.unsplash.com/photo-1580048915913-4f8f5cb481c4?w=700&q=85" alt="Šumava forest morning" />
+    <span>Šumava</span>
+  </div>
+  <div class="photo-strip-item">
+    <img src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?w=700&q=85" alt="Beskydy hills, Moravia" />
+    <span>Beskydy</span>
+  </div>
+  <div class="photo-strip-item">
+    <img src="https://images.unsplash.com/photo-1548015242-b33b7a1d8225?w=700&q=85" alt="Bohemian Switzerland sandstone" />
+    <span>Česká Švýcarsko</span>
+  </div>
+</div>
+
 <!-- PILLARS -->
 <section id="pillars">
   <div class="pillars-header">
@@ -853,11 +609,7 @@
   </div>
   <div class="pillars-grid">
     <div class="pillar">
-      <!-- Beskydy alpine landscape -->
-      <img
-        src="https://images.unsplash.com/photo-1596796675810-38bd82f7f877?w=800&q=85"
-        alt="Beskydy mountain meadow, Moravia"
-      />
+      <img src="https://images.unsplash.com/photo-1596796675810-38bd82f7f877?w=800&q=85" alt="Beskydy mountain meadow, Moravia" />
       <div class="pillar-content">
         <span class="pillar-number">01</span>
         <h3 class="pillar-title">Ecosystem Preservation</h3>
@@ -865,11 +617,7 @@
       </div>
     </div>
     <div class="pillar">
-      <!-- Czech village / Wallachian cultural heritage -->
-      <img
-        src="https://images.unsplash.com/photo-1574890396697-d1d33b7e6437?w=800&q=85"
-        alt="Wallachian village, Beskydy"
-      />
+      <img src="https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?w=800&q=85" alt="Wallachian village, Beskydy" />
       <div class="pillar-content">
         <span class="pillar-number">02</span>
         <h3 class="pillar-title">Cultural Heritage</h3>
@@ -877,11 +625,7 @@
       </div>
     </div>
     <div class="pillar">
-      <!-- Hiking community in Czech mountains -->
-      <img
-        src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800&q=85"
-        alt="Mountain community, Czech highlands"
-      />
+      <img src="https://images.unsplash.com/photo-1522163182402-834f871fd851?w=800&q=85" alt="Community stewardship, Czech mountains" />
       <div class="pillar-content">
         <span class="pillar-number">03</span>
         <h3 class="pillar-title">Community Stewardship</h3>
@@ -890,6 +634,24 @@
     </div>
   </div>
 </section>
+
+<!-- EDITORIAL SPLIT — Beskydy -->
+<div class="editorial-split">
+  <div class="editorial-image">
+    <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=900&q=85" alt="Beskydy hills at dawn, Zlínský kraj" />
+    <span>Beskydy, Zlínský kraj</span>
+  </div>
+  <div class="editorial-text">
+    <span class="label">Our Origin</span>
+    <h2>Born in the<br><em>Moravian</em> foothills</h2>
+    <p class="body-text" style="margin-top:1.5rem;">
+      The Beskydy range above Fryšták was the first landscape Taro ever worked in. The rolling forested ridges of Moravia — modest, intimate, and deeply storied — shaped everything about how we approach mountain stewardship.
+    </p>
+    <p class="body-text" style="margin-top:1.2rem;">
+      That proximity to the land, to the people who farm its edges and hike its paths, remains the foundation of our methodology wherever in the world we operate.
+    </p>
+  </div>
+</div>
 
 <!-- PROJECTS -->
 <section id="projects">
@@ -900,62 +662,67 @@
     </div>
     <a href="#cta" class="link-dark">All projects &rarr;</a>
   </div>
-  <div>
-    <a href="#" class="project-row">
-      <span class="proj-index">01</span>
-      <div>
-        <p class="proj-title">Krkonoše Alpine Meadow Revival</p>
-        <p class="proj-meta">Czechia &middot; Ecology</p>
+  <!-- 3-across top row -->
+  <div class="project-cards">
+    <div class="proj-card">
+      <img src="https://images.unsplash.com/photo-1434394354979-a235cd36269d?w=700&q=85" alt="Krkonoše alpine meadow" />
+      <div class="proj-card-body">
+        <span class="proj-tag">Czechia &middot; Ecology</span>
+        <h3>Krkonoše Alpine Meadow Revival</h3>
+        <p>Rewilding 340 hectares of degraded ridgeline meadows with native flora.</p>
       </div>
-      <p class="proj-desc">Rewilding 340 hectares of degraded ridgeline meadows and reintroducing native flora alongside local farming communities.</p>
-      <span class="proj-arrow">&#8594;</span>
-    </a>
-    <a href="#" class="project-row">
-      <span class="proj-index">02</span>
-      <div>
-        <p class="proj-title">Beskydy Living Folklore Archive</p>
-        <p class="proj-meta">Czechia &middot; Culture</p>
+    </div>
+    <div class="proj-card">
+      <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=85" alt="Beskydy Living Folklore" />
+      <div class="proj-card-body">
+        <span class="proj-tag">Czechia &middot; Culture</span>
+        <h3>Beskydy Living Folklore Archive</h3>
+        <p>Recording oral histories and craft techniques from Wallachian communities.</p>
       </div>
-      <p class="proj-desc">Recording oral histories, songs, and craft techniques from Wallachian mountain communities before they are irretrievably lost.</p>
-      <span class="proj-arrow">&#8594;</span>
-    </a>
-    <a href="#" class="project-row">
-      <span class="proj-index">03</span>
-      <div>
-        <p class="proj-title">Andean Community Exchange</p>
-        <p class="proj-meta">Peru &middot; Global Partnership</p>
+    </div>
+    <div class="proj-card">
+      <img src="https://images.unsplash.com/photo-1535961652354-923cb08225a7?w=700&q=85" alt="Andean community exchange" />
+      <div class="proj-card-body">
+        <span class="proj-tag">Peru &middot; Global Partnership</span>
+        <h3>Andean Community Exchange</h3>
+        <p>Connecting Czech mountain farmers with Quechua communities across continents.</p>
       </div>
-      <p class="proj-desc">Connecting Czech mountain farmers with Quechua communities to share climate adaptation knowledge across continents.</p>
-      <span class="proj-arrow">&#8594;</span>
-    </a>
-    <a href="#" class="project-row">
-      <span class="proj-index">04</span>
-      <div>
-        <p class="proj-title">Šumava Peat Bog Restoration</p>
-        <p class="proj-meta">Czechia &middot; Ecology</p>
+    </div>
+  </div>
+  <!-- 2-across bottom row -->
+  <div class="project-cards-bottom" style="margin-top:2px;">
+    <div class="proj-card" style="aspect-ratio:16/7;">
+      <img src="https://images.unsplash.com/photo-1444464666168-49d633b86797?w=900&q=85" alt="Šumava peat bog" />
+      <div class="proj-card-body">
+        <span class="proj-tag">Czechia &middot; Ecology</span>
+        <h3>Šumava Peat Bog Restoration</h3>
+        <p>Rehabilitating drained peat bogs to restore their role as carbon sinks and biodiversity refugia.</p>
       </div>
-      <p class="proj-desc">Rehabilitating drained peat bogs to restore their critical role as carbon sinks and biodiversity refugia.</p>
-      <span class="proj-arrow">&#8594;</span>
-    </a>
-    <a href="#" class="project-row">
-      <span class="proj-index">05</span>
-      <div>
-        <p class="proj-title">Himalayan Dialect Documentation</p>
-        <p class="proj-meta">Nepal &middot; Culture</p>
+    </div>
+    <div class="proj-card" style="aspect-ratio:16/7;">
+      <img src="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?w=900&q=85" alt="Himalayan dialect documentation" />
+      <div class="proj-card-body">
+        <span class="proj-tag">Nepal &middot; Culture</span>
+        <h3>Himalayan Dialect Documentation</h3>
+        <p>Partnering with Nepalese linguists to archive endangered mountain languages of the Khumbu region.</p>
       </div>
-      <p class="proj-desc">Partnering with Nepalese linguists to archive endangered mountain languages of the Khumbu region.</p>
-      <span class="proj-arrow">&#8594;</span>
-    </a>
+    </div>
   </div>
 </section>
+
+<!-- WIDE PHOTO — Jeseníky -->
+<div class="wide-photo">
+  <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1800&q=85" alt="Jeseníky highlands, Czech Republic" />
+  <span class="wide-photo-caption">"A mountain cannot be saved unless the people who live in its shadow are heard."</span>
+  <span class="wide-photo-tag">Jeseníky, Silesian Highlands</span>
+</div>
 
 <!-- CZECHIA -->
 <section id="czechia">
   <div class="czechia-image-wrap">
-    <!-- Beskydy hills, Moravia — near Fryšták -->
     <img
-      src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1000&q=85"
-      alt="Beskydy hills, Zlínský kraj"
+      src="https://images.unsplash.com/photo-1549880181-56a44cf4a9a5?w=1000&q=85"
+      alt="Beskydy hills, Zlínský kraj, near Fryšták"
     />
   </div>
   <div class="czechia-panel">
@@ -975,6 +742,30 @@
   </div>
 </section>
 
+<!-- MOSAIC — Czech landscapes -->
+<div class="mosaic">
+  <div class="mosaic-item tall">
+    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=900&q=85" alt="Krkonoše winter, Czech Republic" />
+    <span>Krkonoše in winter</span>
+  </div>
+  <div class="mosaic-item">
+    <img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=600&q=85" alt="Šumava forest lake" />
+    <span>Šumava lake</span>
+  </div>
+  <div class="mosaic-item">
+    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=600&q=85" alt="Beskydy pine forest" />
+    <span>Beskydy forest</span>
+  </div>
+  <div class="mosaic-item">
+    <img src="https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?w=600&q=85" alt="Czech mountain meadow summer" />
+    <span>Mountain meadow</span>
+  </div>
+  <div class="mosaic-item">
+    <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=600&q=85" alt="Jeseníky morning mist" />
+    <span>Morning mist, Jeseníky</span>
+  </div>
+</div>
+
 <!-- FOUNDERS -->
 <section id="founders">
   <div class="founders-header">
@@ -984,10 +775,7 @@
   <div class="founders-grid">
     <div class="founder-card">
       <div class="founder-photo">
-        <img
-          src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?w=400&q=85"
-          alt="Daniel Štorcel"
-        />
+        <img src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?w=400&q=85" alt="Daniel Štorcel" />
       </div>
       <div class="founder-info">
         <h3 class="founder-name">Daniel Štorcel</h3>
@@ -999,10 +787,7 @@
     </div>
     <div class="founder-card">
       <div class="founder-photo">
-        <img
-          src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?w=400&q=85"
-          alt="Samuel Holík"
-        />
+        <img src="https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?w=400&q=85" alt="Samuel Holík" />
       </div>
       <div class="founder-info">
         <h3 class="founder-name">Samuel Holík</h3>
@@ -1014,6 +799,26 @@
     </div>
   </div>
 </section>
+
+<!-- PHOTO STRIP 2 — global mountains -->
+<div class="photo-strip">
+  <div class="photo-strip-item">
+    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=700&q=85" alt="Alps mountain peaks" />
+    <span>Alps, Austria</span>
+  </div>
+  <div class="photo-strip-item">
+    <img src="https://images.unsplash.com/photo-1535961652354-923cb08225a7?w=700&q=85" alt="Andean landscape, Peru" />
+    <span>Andes, Peru</span>
+  </div>
+  <div class="photo-strip-item">
+    <img src="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?w=700&q=85" alt="Himalayan range, Nepal" />
+    <span>Himalayas, Nepal</span>
+  </div>
+  <div class="photo-strip-item">
+    <img src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=700&q=85" alt="Mountain range at dusk" />
+    <span>Caucasus, Georgia</span>
+  </div>
+</div>
 
 <!-- CTA -->
 <section id="cta">
