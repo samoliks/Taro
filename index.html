@@ -6,449 +6,453 @@
   <title>Taro — Mountain Preservation & Culture</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --stone:   #2c2c2c;
-      --forest:  #2d4a2d;
-      --moss:    #4a7c59;
-      --sage:    #8aad8a;
-      --snow:    #f4f2ee;
-      --cream:   #faf8f4;
-      --rock:    #7a7265;
-      --accent:  #c0832a;
-      --text:    #1e1e1e;
+      --black:   #0d0d0d;
+      --charcoal:#1c1c1c;
+      --mid:     #5a5a5a;
+      --light:   #a8a8a8;
+      --rule:    #e0ddd8;
+      --bg:      #f8f6f2;
+      --white:   #ffffff;
+      --accent:  #3b5c3b;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; font-size: 16px; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: var(--cream);
-      color: var(--text);
+      background: var(--bg);
+      color: var(--black);
       line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 1.2rem 4rem;
-      background: rgba(44,44,44,0.92);
-      backdrop-filter: blur(8px);
+      padding: 1.6rem 5vw;
+      border-bottom: 1px solid transparent;
+      transition: background 0.3s, border-color 0.3s;
+      background: rgba(248,246,242,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom-color: var(--rule);
     }
 
     .nav-logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      color: var(--snow);
-      letter-spacing: 0.06em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--black);
       text-decoration: none;
     }
-
-    .nav-logo span { color: var(--sage); }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 2.4rem;
+      gap: 2.8rem;
+      align-items: center;
     }
 
     nav a {
-      color: var(--snow);
+      color: var(--mid);
       text-decoration: none;
-      font-size: 0.88rem;
+      font-size: 0.72rem;
       font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      opacity: 0.85;
-      transition: opacity 0.2s;
+      transition: color 0.2s;
     }
 
-    nav a:hover { opacity: 1; color: var(--sage); }
+    nav a:hover { color: var(--black); }
 
     .nav-cta {
-      background: var(--moss);
-      color: var(--snow) !important;
-      padding: 0.55rem 1.4rem;
-      border-radius: 2px;
-      opacity: 1 !important;
-      transition: background 0.2s !important;
+      color: var(--black) !important;
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 1px;
     }
-
-    .nav-cta:hover { background: var(--forest) !important; }
 
     /* ── HERO ── */
     #hero {
       height: 100vh;
       position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-left {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .hero-bg {
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(to bottom, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.55) 100%),
-        url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80') center/cover no-repeat;
-    }
-
-    .hero-content {
-      position: relative;
-      text-align: center;
-      color: var(--snow);
-      max-width: 780px;
-      padding: 0 2rem;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 5vw 5rem;
+      background: var(--bg);
+      z-index: 1;
     }
 
     .hero-eyebrow {
-      font-size: 0.78rem;
-      letter-spacing: 0.22em;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--sage);
-      margin-bottom: 1.2rem;
+      color: var(--light);
       font-weight: 500;
+      margin-bottom: 2rem;
     }
 
     .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 7vw, 5.5rem);
-      line-height: 1.08;
-      margin-bottom: 1.6rem;
-      font-weight: 700;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 5vw, 4.8rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--black);
+      margin-bottom: 2.5rem;
     }
 
-    .hero-subtitle {
-      font-size: 1.15rem;
+    .hero-title em {
+      font-style: italic;
+      color: var(--mid);
+    }
+
+    .hero-desc {
+      font-size: 0.9rem;
+      color: var(--mid);
+      max-width: 380px;
+      line-height: 1.8;
+      margin-bottom: 3rem;
+      font-weight: 300;
+    }
+
+    .hero-links {
+      display: flex;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    .link-primary {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      border-bottom: 1px solid var(--black);
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+    }
+
+    .link-primary:hover { opacity: 0.5; }
+
+    .link-secondary {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .link-secondary:hover { color: var(--mid); }
+
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-right img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .hero-right::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(248,246,242,0.15), transparent);
+    }
+
+    /* ── SHARED ── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5vw;
+    }
+
+    .label {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--light);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--black);
+    }
+
+    h2 em { font-style: italic; color: var(--mid); }
+
+    .rule {
+      width: 40px;
+      height: 1px;
+      background: var(--rule);
+      margin: 2.5rem 0;
+    }
+
+    .body-text {
+      font-size: 0.93rem;
+      color: var(--mid);
+      line-height: 1.9;
       font-weight: 300;
       max-width: 520px;
-      margin: 0 auto 2.8rem;
-      opacity: 0.9;
     }
 
-    .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-
-    .btn {
-      display: inline-block;
-      padding: 0.85rem 2.2rem;
-      border-radius: 2px;
-      font-size: 0.86rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: all 0.25s;
-      cursor: pointer;
-      border: none;
+    /* ── INTRO STRIP ── */
+    #intro {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 2rem 5vw;
+      display: flex;
+      align-items: center;
+      gap: 6vw;
     }
 
-    .btn-primary {
-      background: var(--moss);
-      color: var(--snow);
-    }
-
-    .btn-primary:hover { background: var(--forest); transform: translateY(-2px); }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--snow);
-      border: 1.5px solid rgba(255,255,255,0.6);
-    }
-
-    .btn-outline:hover { background: rgba(255,255,255,0.12); transform: translateY(-2px); }
-
-    .scroll-hint {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--snow);
-      opacity: 0.6;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
+    .intro-stat {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
+      gap: 0.25rem;
+      flex-shrink: 0;
     }
 
-    .scroll-hint::after {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 40px;
-      background: rgba(255,255,255,0.5);
-      animation: scrollLine 1.8s ease-in-out infinite;
+    .intro-stat-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--black);
+      line-height: 1;
     }
 
-    @keyframes scrollLine {
-      0%   { opacity: 0; transform: scaleY(0) translateY(-10px); }
-      50%  { opacity: 1; }
-      100% { opacity: 0; transform: scaleY(1) translateY(10px); }
-    }
-
-    /* ── SECTIONS ── */
-    section { padding: 7rem 4rem; }
-
-    .section-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.22em;
+    .intro-stat-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--moss);
-      font-weight: 600;
-      margin-bottom: 0.8rem;
+      color: var(--light);
     }
 
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 2.9rem);
-      line-height: 1.2;
-      margin-bottom: 1.4rem;
-      color: var(--stone);
+    .intro-divider {
+      width: 1px;
+      height: 48px;
+      background: var(--rule);
+      flex-shrink: 0;
     }
 
-    .section-body {
-      font-size: 1.05rem;
-      color: var(--rock);
-      max-width: 620px;
-      line-height: 1.8;
+    .intro-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: var(--mid);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 540px;
     }
 
     /* ── MISSION ── */
     #mission {
-      background: var(--snow);
+      padding: 10rem 5vw;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 6rem;
+      gap: 8vw;
       align-items: center;
     }
 
     .mission-image {
-      border-radius: 2px;
-      overflow: hidden;
-      aspect-ratio: 4/5;
       position: relative;
+      aspect-ratio: 3/4;
+      overflow: hidden;
     }
 
     .mission-image img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       display: block;
-      transition: transform 0.5s ease;
+      transition: transform 0.7s ease;
     }
 
-    .mission-image:hover img { transform: scale(1.04); }
+    .mission-image:hover img { transform: scale(1.03); }
 
-    .mission-image::after {
-      content: '';
+    .mission-image-caption {
       position: absolute;
-      inset: 0;
-      border: 3px solid var(--sage);
-      border-radius: 2px;
-      transform: translate(12px, 12px);
-      z-index: -1;
+      bottom: 1.5rem; left: 1.5rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
     }
 
-    .mission-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2rem;
-      margin-top: 3rem;
+    /* ── PILLARS ── */
+    #pillars {
+      padding: 0 5vw 10rem;
+      border-top: 1px solid var(--rule);
+      padding-top: 6rem;
     }
 
-    .stat-box {
-      border-top: 2px solid var(--sage);
-      padding-top: 1rem;
-    }
-
-    .stat-number {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.4rem;
-      color: var(--forest);
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-size: 0.82rem;
-      color: var(--rock);
-      margin-top: 0.3rem;
-      line-height: 1.4;
-    }
-
-    /* ── FOCUS AREAS ── */
-    #focus {
-      background: var(--stone);
-      color: var(--snow);
-    }
-
-    #focus .section-title { color: var(--snow); }
-    #focus .section-body  { color: rgba(244,242,238,0.7); }
-    #focus .section-label { color: var(--sage); }
-
-    .focus-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 4rem;
-    }
-
-    .focus-card {
-      position: relative;
-      overflow: hidden;
-      aspect-ratio: 3/4;
-    }
-
-    .focus-card img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.55) saturate(0.8);
-      transition: filter 0.4s, transform 0.5s;
-    }
-
-    .focus-card:hover img {
-      filter: brightness(0.7) saturate(0.9);
-      transform: scale(1.04);
-    }
-
-    .focus-card-content {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 2.5rem 2rem;
-      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
-    }
-
-    .focus-icon {
-      font-size: 2rem;
-      margin-bottom: 0.8rem;
-      display: block;
-    }
-
-    .focus-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      color: var(--snow);
-      margin-bottom: 0.5rem;
-    }
-
-    .focus-card p {
-      font-size: 0.88rem;
-      color: rgba(244,242,238,0.8);
-      line-height: 1.6;
-    }
-
-    /* ── PROJECTS ── */
-    #projects { background: var(--cream); }
-
-    .projects-intro {
+    .pillars-header {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 4rem;
       align-items: end;
-      margin-bottom: 4rem;
+      margin-bottom: 6rem;
     }
 
-    .project-cards {
+    .pillars-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2rem;
+      gap: 2px;
     }
 
-    .project-card {
-      background: white;
-      border-radius: 2px;
+    .pillar {
+      position: relative;
+      aspect-ratio: 2/3;
       overflow: hidden;
-      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: default;
     }
 
-    .project-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
-    }
-
-    .project-card img {
-      width: 100%;
-      height: 200px;
+    .pillar img {
+      width: 100%; height: 100%;
       object-fit: cover;
       display: block;
+      filter: brightness(0.5) saturate(0.6);
+      transition: filter 0.5s, transform 0.6s;
     }
 
-    .project-card-body {
-      padding: 1.6rem;
+    .pillar:hover img {
+      filter: brightness(0.6) saturate(0.75);
+      transform: scale(1.04);
     }
 
-    .project-tag {
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--moss);
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
-
-    .project-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      margin-bottom: 0.6rem;
-      color: var(--stone);
-    }
-
-    .project-card p {
-      font-size: 0.87rem;
-      color: var(--rock);
-      line-height: 1.65;
-    }
-
-    /* ── CZECHIA HIGHLIGHT ── */
-    #czechia {
-      background: var(--forest);
-      color: var(--snow);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      padding: 0;
-    }
-
-    .czechia-text {
-      padding: 7rem 5rem;
-    }
-
-    .czechia-text .section-label { color: var(--sage); }
-    .czechia-text .section-title { color: var(--snow); }
-    .czechia-text .section-body  { color: rgba(244,242,238,0.75); }
-
-    .range-list {
-      list-style: none;
-      margin-top: 2.5rem;
+    .pillar-content {
+      position: absolute;
+      inset: 0;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      justify-content: flex-end;
+      padding: 2.5rem 2rem;
     }
 
-    .range-list li {
+    .pillar-number {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 4rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.12);
+      line-height: 1;
+      margin-bottom: auto;
+      padding-top: 2rem;
+    }
+
+    .pillar-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-bottom: 0.6rem;
+      line-height: 1.2;
+    }
+
+    .pillar-body {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* ── PROJECTS ── */
+    #projects {
+      padding: 0 5vw 10rem;
+    }
+
+    .projects-header {
       display: flex;
-      align-items: center;
-      gap: 0.9rem;
-      font-size: 0.95rem;
-      color: rgba(244,242,238,0.85);
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--rule);
     }
 
-    .range-list li::before {
-      content: '';
-      display: block;
-      width: 28px;
-      height: 2px;
-      background: var(--sage);
-      flex-shrink: 0;
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 320px 120px;
+      align-items: center;
+      gap: 3rem;
+      padding: 2.2rem 0;
+      border-bottom: 1px solid var(--rule);
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.2s;
+    }
+
+    .project-row:hover { background: rgba(0,0,0,0.02); }
+
+    .project-row:hover .project-arrow { transform: translateX(4px); }
+
+    .project-index {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--light);
+      font-weight: 300;
+    }
+
+    .project-info h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--black);
+      margin-bottom: 0.2rem;
+    }
+
+    .project-info p {
+      font-size: 0.8rem;
+      color: var(--light);
+      letter-spacing: 0.08em;
+    }
+
+    .project-desc {
+      font-size: 0.85rem;
+      color: var(--mid);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .project-arrow {
+      font-size: 1rem;
+      color: var(--light);
+      text-align: right;
+      transition: transform 0.25s;
+    }
+
+    /* ── CZECHIA ── */
+    #czechia {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
     }
 
     .czechia-image {
@@ -457,163 +461,306 @@
     }
 
     .czechia-image img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
       display: block;
-      filter: brightness(0.75) saturate(0.85);
+      filter: brightness(0.8) saturate(0.8);
     }
 
-    /* ── TEAM ── */
-    #team { background: var(--snow); }
+    .czechia-text {
+      background: var(--charcoal);
+      color: var(--white);
+      padding: 8rem 5vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
 
-    .team-grid {
+    .czechia-text .label { color: rgba(255,255,255,0.3); }
+    .czechia-text h2 { color: var(--white); }
+    .czechia-text h2 em { color: rgba(255,255,255,0.4); }
+    .czechia-text .rule { background: rgba(255,255,255,0.15); }
+    .czechia-text .body-text { color: rgba(255,255,255,0.5); }
+
+    .range-list {
+      list-style: none;
+      margin-top: 3rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .range-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 1.2rem;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      letter-spacing: 0.02em;
+    }
+
+    .range-list li span:first-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.2);
+      flex-shrink: 0;
+      width: 20px;
+    }
+
+    /* ── FOUNDERS ── */
+    #founders {
+      padding: 10rem 5vw;
+      border-top: 1px solid var(--rule);
+    }
+
+    .founders-header {
+      margin-bottom: 6rem;
+    }
+
+    .founders-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-      margin-top: 4rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
     }
 
-    .team-card {
-      text-align: center;
+    .founder-card {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 2.5rem;
+      align-items: start;
     }
 
-    .team-avatar {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
+    .founder-photo {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .founder-photo img {
+      width: 100%; height: 100%;
       object-fit: cover;
-      margin: 0 auto 1.2rem;
       display: block;
-      border: 3px solid var(--sage);
+      filter: grayscale(30%);
     }
 
-    .team-card h4 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      color: var(--stone);
-      margin-bottom: 0.25rem;
+    .founder-info {
+      padding-top: 0.5rem;
     }
 
-    .team-role {
-      font-size: 0.8rem;
-      color: var(--moss);
-      font-weight: 600;
-      letter-spacing: 0.1em;
+    .founder-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--black);
+      margin-bottom: 0.3rem;
+    }
+
+    .founder-role {
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 1.5rem;
     }
 
-    /* ── CTA STRIP ── */
+    .founder-bio {
+      font-size: 0.87rem;
+      color: var(--mid);
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    /* ── CTA ── */
     #cta {
-      background:
-        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-        url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1600&q=80') center/cover no-repeat;
+      position: relative;
+      overflow: hidden;
+      padding: 12rem 5vw;
       text-align: center;
-      color: var(--snow);
-      padding: 8rem 4rem;
     }
 
-    #cta .section-label { color: var(--sage); }
-    #cta .section-title { color: var(--snow); margin: 0 auto 1rem; max-width: 600px; }
-    #cta .section-body  { color: rgba(244,242,238,0.75); margin: 0 auto 3rem; text-align: center; }
+    .cta-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(rgba(13,13,13,0.68), rgba(13,13,13,0.68)),
+        url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1800&q=85') center/cover no-repeat;
+    }
+
+    .cta-content {
+      position: relative;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .cta-content .label { color: rgba(255,255,255,0.3); }
+
+    .cta-content h2 {
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+
+    .cta-content h2 em { color: rgba(255,255,255,0.4); }
+
+    .cta-content p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      line-height: 1.85;
+      margin-bottom: 3rem;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .btn-white {
+      display: inline-block;
+      padding: 0.9rem 2.5rem;
+      background: var(--white);
+      color: var(--black);
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn-white:hover { opacity: 0.85; }
+
+    .link-ghost {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .link-ghost:hover {
+      color: rgba(255,255,255,0.8);
+      border-color: rgba(255,255,255,0.5);
+    }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--stone);
-      color: rgba(244,242,238,0.65);
-      padding: 4rem 4rem 2.5rem;
+      background: var(--black);
+      color: rgba(255,255,255,0.3);
+      padding: 5rem 5vw 3rem;
     }
 
-    .footer-grid {
+    .footer-top {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 3rem;
-      padding-bottom: 3rem;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+      padding-bottom: 4rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
     }
 
     .footer-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      color: var(--snow);
-      margin-bottom: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 1.2rem;
     }
 
-    .footer-brand span { color: var(--sage); }
+    .footer-tagline {
+      font-size: 0.82rem;
+      line-height: 1.75;
+      max-width: 280px;
+      font-weight: 300;
+    }
 
-    .footer-desc {
-      font-size: 0.87rem;
-      line-height: 1.7;
-      max-width: 260px;
+    .footer-address {
+      margin-top: 1.5rem;
+      font-size: 0.75rem;
+      line-height: 1.9;
+      letter-spacing: 0.04em;
     }
 
     .footer-col h5 {
-      color: var(--snow);
-      font-size: 0.8rem;
-      letter-spacing: 0.15em;
+      font-size: 0.67rem;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-bottom: 1.2rem;
-      font-weight: 600;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 1.4rem;
+      font-weight: 500;
     }
 
     .footer-col ul { list-style: none; }
-    .footer-col li { margin-bottom: 0.7rem; }
+
+    .footer-col li { margin-bottom: 0.8rem; }
 
     .footer-col a {
-      color: rgba(244,242,238,0.6);
+      color: rgba(255,255,255,0.3);
       text-decoration: none;
-      font-size: 0.88rem;
+      font-size: 0.83rem;
+      font-weight: 300;
       transition: color 0.2s;
     }
 
-    .footer-col a:hover { color: var(--sage); }
+    .footer-col a:hover { color: rgba(255,255,255,0.75); }
 
     .footer-bottom {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 2rem;
-      font-size: 0.8rem;
+      padding-top: 2.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
     }
 
-    .social-links {
+    .footer-socials {
       display: flex;
-      gap: 1.2rem;
+      gap: 2rem;
     }
 
-    .social-links a {
-      color: rgba(244,242,238,0.5);
+    .footer-socials a {
+      color: rgba(255,255,255,0.25);
       text-decoration: none;
-      font-size: 0.82rem;
-      letter-spacing: 0.08em;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
       transition: color 0.2s;
     }
 
-    .social-links a:hover { color: var(--sage); }
+    .footer-socials a:hover { color: rgba(255,255,255,0.6); }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
-      nav { padding: 1rem 2rem; }
-      section { padding: 5rem 2rem; }
-      #mission, #czechia { grid-template-columns: 1fr; }
-      .czechia-image { height: 360px; }
-      .czechia-text { padding: 4rem 2rem; }
-      .focus-grid { grid-template-columns: 1fr 1fr; }
-      .team-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+      #hero { grid-template-columns: 1fr; height: auto; }
+      .hero-left { padding: 10rem 5vw 5rem; min-height: 70vh; }
+      .hero-right { height: 55vw; }
+      #mission { grid-template-columns: 1fr; gap: 4rem; }
+      .mission-image { aspect-ratio: 16/9; }
+      #czechia { grid-template-columns: 1fr; }
+      .czechia-image { height: 50vw; }
+      .founders-grid { grid-template-columns: 1fr; }
+      .pillars-header { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .project-row { grid-template-columns: 60px 1fr; }
+      .project-desc, .project-arrow { display: none; }
     }
 
     @media (max-width: 700px) {
       nav ul { display: none; }
-      nav { padding: 1rem 1.5rem; }
-      section { padding: 4rem 1.5rem; }
-      .focus-grid { grid-template-columns: 1fr; }
-      .project-cards { grid-template-columns: 1fr; }
-      .projects-intro { grid-template-columns: 1fr; gap: 2rem; }
-      .team-grid { grid-template-columns: 1fr 1fr; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
-      .mission-stats { grid-template-columns: 1fr 1fr; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .founder-card { grid-template-columns: 1fr; }
+      .founder-photo { aspect-ratio: 16/9; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 1.2rem; }
+      #intro { flex-wrap: wrap; gap: 2rem; }
+      .intro-divider { display: none; }
     }
   </style>
 </head>
@@ -621,99 +768,133 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#hero">Tar<span>o</span></a>
+  <a class="nav-logo" href="#hero">Taro</a>
   <ul>
     <li><a href="#mission">Mission</a></li>
-    <li><a href="#focus">Focus Areas</a></li>
+    <li><a href="#pillars">Focus</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#czechia">Czechia</a></li>
-    <li><a href="#team">Team</a></li>
-    <li><a class="nav-cta" href="#cta">Support Us</a></li>
+    <li><a href="#founders">Founders</a></li>
+    <li><a class="nav-cta" href="#cta">Support</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">Czech NGO · Est. 2018</p>
-    <h1 class="hero-title">Protecting Mountains.<br>Preserving Cultures.</h1>
-    <p class="hero-subtitle">Taro connects communities, conservationists, and cultures to safeguard the mountain landscapes of Czechia and the world.</p>
-    <div class="btn-group">
-      <a href="#mission" class="btn btn-primary">Our Mission</a>
-      <a href="#projects" class="btn btn-outline">See Our Work</a>
+  <div class="hero-left">
+    <p class="hero-eyebrow">Fryšták, Czech Republic &nbsp;·&nbsp; Est. 2018</p>
+    <h1 class="hero-title">
+      Protecting<br>mountains.<br>
+      <em>Preserving</em><br>cultures.
+    </h1>
+    <p class="hero-desc">
+      Taro is a Czech non-governmental organisation dedicated to the long-term stewardship of mountain ecosystems and the living cultures shaped by them — in Czechia and across the world.
+    </p>
+    <div class="hero-links">
+      <a href="#mission" class="link-primary">Our Mission</a>
+      <a href="#projects" class="link-secondary">View Projects</a>
     </div>
   </div>
-  <div class="scroll-hint">Scroll</div>
+  <div class="hero-right">
+    <img
+      src="https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=1400&q=90"
+      alt="Mountain ridge at dawn"
+    />
+  </div>
 </section>
+
+<!-- INTRO STRIP -->
+<div id="intro">
+  <div class="intro-stat">
+    <span class="intro-stat-number">12</span>
+    <span class="intro-stat-label">Mountain ranges</span>
+  </div>
+  <div class="intro-divider"></div>
+  <div class="intro-stat">
+    <span class="intro-stat-number">4 800</span>
+    <span class="intro-stat-label">People engaged yearly</span>
+  </div>
+  <div class="intro-divider"></div>
+  <div class="intro-stat">
+    <span class="intro-stat-number">38</span>
+    <span class="intro-stat-label">Active projects</span>
+  </div>
+  <div class="intro-divider"></div>
+  <div class="intro-stat">
+    <span class="intro-stat-number">97%</span>
+    <span class="intro-stat-label">Funding to programmes</span>
+  </div>
+  <div class="intro-divider"></div>
+  <p class="intro-quote">
+    "Mountains are not conquered — they are understood, lived in, and handed on."
+  </p>
+</div>
 
 <!-- MISSION -->
 <section id="mission">
-  <div style="position:relative;">
-    <div class="mission-image">
-      <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&q=80" alt="Krkonoše mountains in Czech Republic" />
-    </div>
+  <div class="mission-image">
+    <img
+      src="https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?w=900&q=85"
+      alt="Šumava wilderness, Czech Republic"
+    />
+    <span class="mission-image-caption">Šumava National Park, South Bohemia</span>
   </div>
   <div>
-    <p class="section-label">Who We Are</p>
-    <h2 class="section-title">A Czech voice for the world's mountains</h2>
-    <p class="section-body">
-      Founded in Prague in 2018, Taro is a non-governmental organisation dedicated to the preservation of mountain ecosystems and the living cultures that have grown around them for centuries.
+    <span class="label">Who We Are</span>
+    <h2>A Czech voice for<br>the world's <em>mountains</em></h2>
+    <div class="rule"></div>
+    <p class="body-text">
+      Founded in Fryšták in 2018 and rooted in the foothills of the Beskydy range, Taro was built on a simple conviction: that mountain landscapes and mountain cultures are inseparable. Lose one and you lose the other.
     </p>
-    <p class="section-body" style="margin-top:1.2rem;">
-      We work at the intersection of environmental science, cultural heritage, and community empowerment — bridging local knowledge in the Krkonoše, Šumava, and Beskydy ranges with global mountain conservation movements.
+    <p class="body-text" style="margin-top: 1.4rem;">
+      We work at the intersection of environmental science, intangible cultural heritage, and community empowerment — connecting local knowledge in the Czech highlands with global mountain conservation movements from the Andes to the Himalayas.
     </p>
-    <div class="mission-stats">
-      <div class="stat-box">
-        <div class="stat-number">12</div>
-        <div class="stat-label">Mountain ranges protected across 3 continents</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number">4 800</div>
-        <div class="stat-label">Community members engaged annually</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number">38</div>
-        <div class="stat-label">Active field projects in 2026</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number">97%</div>
-        <div class="stat-label">Of donations go directly to programmes</div>
-      </div>
-    </div>
   </div>
 </section>
 
-<!-- FOCUS AREAS -->
-<section id="focus">
-  <div style="max-width: 620px;">
-    <p class="section-label">What We Do</p>
-    <h2 class="section-title">Three pillars of mountain stewardship</h2>
-    <p class="section-body">Our work spans ecology, culture, and community — because a mountain cannot be saved unless the people and traditions that define it are protected too.</p>
+<!-- PILLARS -->
+<section id="pillars">
+  <div class="pillars-header">
+    <div>
+      <span class="label">What We Do</span>
+      <h2>Three pillars of<br><em>mountain stewardship</em></h2>
+    </div>
+    <p class="body-text">
+      Our work spans ecology, culture, and community — because a mountain cannot be protected unless the people and traditions that define it are recognised and valued.
+    </p>
   </div>
-  <div class="focus-grid">
-    <div class="focus-card">
-      <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=700&q=80" alt="Mountain ecosystem" />
-      <div class="focus-card-content">
-        <span class="focus-icon">🌿</span>
-        <h3>Ecosystem Preservation</h3>
-        <p>Restoring alpine meadows, peat bogs, and forest corridors threatened by climate change and over-tourism.</p>
+  <div class="pillars-grid">
+    <div class="pillar">
+      <img
+        src="https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800&q=85"
+        alt="Alpine meadow ecosystem"
+      />
+      <div class="pillar-content">
+        <span class="pillar-number">01</span>
+        <h3 class="pillar-title">Ecosystem Preservation</h3>
+        <p class="pillar-body">Restoring alpine meadows, peat bogs, and forest corridors threatened by climate change and unsustainable land use.</p>
       </div>
     </div>
-    <div class="focus-card">
-      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=700&q=80" alt="Mountain culture" />
-      <div class="focus-card-content">
-        <span class="focus-icon">🎭</span>
-        <h3>Cultural Heritage</h3>
-        <p>Documenting and revitalising mountain dialects, folk traditions, architecture, and artisan crafts.</p>
+    <div class="pillar">
+      <img
+        src="https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=85"
+        alt="Mountain winter culture"
+      />
+      <div class="pillar-content">
+        <span class="pillar-number">02</span>
+        <h3 class="pillar-title">Cultural Heritage</h3>
+        <p class="pillar-body">Documenting and revitalising mountain dialects, pastoral traditions, vernacular architecture, and artisan knowledge.</p>
       </div>
     </div>
-    <div class="focus-card">
-      <img src="https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=700&q=80" alt="Community education" />
-      <div class="focus-card-content">
-        <span class="focus-icon">🤝</span>
-        <h3>Community Education</h3>
-        <p>Training local guides, schools, and municipal leaders to become long-term stewards of their mountain home.</p>
+    <div class="pillar">
+      <img
+        src="https://images.unsplash.com/photo-1475924156734-496f6cac6ec1?w=800&q=85"
+        alt="Community stewardship"
+      />
+      <div class="pillar-content">
+        <span class="pillar-number">03</span>
+        <h3 class="pillar-title">Community Stewardship</h3>
+        <p class="pillar-body">Training local guides, educators, and municipal leaders to become long-term stewards of their mountain home.</p>
       </div>
     </div>
   </div>
@@ -721,113 +902,158 @@
 
 <!-- PROJECTS -->
 <section id="projects">
-  <div class="projects-intro">
+  <div class="projects-header">
     <div>
-      <p class="section-label">Current Projects</p>
-      <h2 class="section-title">Work happening right now</h2>
+      <span class="label">Selected Projects</span>
+      <h2>Current <em>field work</em></h2>
     </div>
-    <p class="section-body">From the peat bogs of Šumava to the high ridges of the Himalayas, Taro's teams are on the ground.</p>
+    <a href="#cta" class="link-secondary">All projects</a>
   </div>
-  <div class="project-cards">
-    <div class="project-card">
-      <img src="https://images.unsplash.com/photo-1548438294-1ad5d5f4f063?w=600&q=80" alt="Krkonoše revival" />
-      <div class="project-card-body">
-        <p class="project-tag">Czechia · Ecology</p>
+  <div class="projects-list">
+    <a href="#" class="project-row">
+      <span class="project-index">01</span>
+      <div class="project-info">
         <h3>Krkonoše Alpine Meadow Revival</h3>
-        <p>Rewilding 340 hectares of degraded ridgeline meadows and reintroducing native flora with local farming communities.</p>
+        <p>Czechia &nbsp;·&nbsp; Ecology</p>
       </div>
-    </div>
-    <div class="project-card">
-      <img src="https://images.unsplash.com/photo-1570641963303-92ce4845ed4c?w=600&q=80" alt="Beskydy folklore" />
-      <div class="project-card-body">
-        <p class="project-tag">Czechia · Culture</p>
+      <p class="project-desc">Rewilding 340 hectares of degraded ridgeline meadows and reintroducing native flora alongside local farming communities.</p>
+      <span class="project-arrow">&#8594;</span>
+    </a>
+    <a href="#" class="project-row">
+      <span class="project-index">02</span>
+      <div class="project-info">
         <h3>Beskydy Living Folklore Archive</h3>
-        <p>Recording oral histories, songs, and craft techniques from Wallachian mountain communities before they are lost.</p>
+        <p>Czechia &nbsp;·&nbsp; Culture</p>
       </div>
-    </div>
-    <div class="project-card">
-      <img src="https://images.unsplash.com/photo-1544198365-f5d60b6d8190?w=600&q=80" alt="Andean partnership" />
-      <div class="project-card-body">
-        <p class="project-tag">Peru · Global</p>
+      <p class="project-desc">Recording oral histories, songs, and craft techniques from Wallachian mountain communities before they are irretrievably lost.</p>
+      <span class="project-arrow">&#8594;</span>
+    </a>
+    <a href="#" class="project-row">
+      <span class="project-index">03</span>
+      <div class="project-info">
         <h3>Andean Community Exchange</h3>
-        <p>Connecting Czech mountain farmers with Quechua communities to share climate adaptation knowledge across continents.</p>
+        <p>Peru &nbsp;·&nbsp; Global Partnership</p>
       </div>
-    </div>
+      <p class="project-desc">Connecting Czech mountain farmers with Quechua communities to share climate adaptation knowledge across continents.</p>
+      <span class="project-arrow">&#8594;</span>
+    </a>
+    <a href="#" class="project-row">
+      <span class="project-index">04</span>
+      <div class="project-info">
+        <h3>Šumava Peat Bog Restoration</h3>
+        <p>Czechia &nbsp;·&nbsp; Ecology</p>
+      </div>
+      <p class="project-desc">Rehabilitating drained peat bogs to restore their critical role as carbon sinks and biodiversity refugia.</p>
+      <span class="project-arrow">&#8594;</span>
+    </a>
+    <a href="#" class="project-row">
+      <span class="project-index">05</span>
+      <div class="project-info">
+        <h3>Himalayan Dialect Documentation</h3>
+        <p>Nepal &nbsp;·&nbsp; Culture</p>
+      </div>
+      <p class="project-desc">Partnering with Nepalese linguists to archive endangered mountain languages of the Khumbu region.</p>
+      <span class="project-arrow">&#8594;</span>
+    </a>
   </div>
 </section>
 
-<!-- CZECHIA SECTION -->
+<!-- CZECHIA -->
 <section id="czechia">
+  <div class="czechia-image">
+    <img
+      src="https://images.unsplash.com/photo-1541849546-216549ae216d?w=1000&q=85"
+      alt="Beskydy mountains, Moravia"
+    />
+  </div>
   <div class="czechia-text">
-    <p class="section-label">Our Home Mountains</p>
-    <h2 class="section-title">Rooted in the heart of Europe</h2>
-    <p class="section-body">
-      Czech mountain ranges are small by global standards but immensely rich in biodiversity and cultural identity. Taro was born here — and remains deeply committed to these landscapes.
+    <span class="label">Our Home</span>
+    <h2>Rooted in<br><em>Moravian</em> hills</h2>
+    <div class="rule"></div>
+    <p class="body-text">
+      Based in Fryšták — a small town in the Zlín region at the foot of the Beskydy range — Taro was shaped by the landscapes immediately outside its door. Czech mountain ranges are modest in elevation but immensely rich in biodiversity, folklore, and identity.
     </p>
     <ul class="range-list">
-      <li>Krkonoše — Bohemian Giant Mountains, UNESCO Biosphere Reserve</li>
-      <li>Šumava — Europe's largest contiguous forest, vital peat bogs</li>
-      <li>Beskydy — Carpathian foothills with Wallachian pastoral culture</li>
-      <li>Jeseníky — Silesian highlands and rare glacial relict species</li>
-      <li>Česká Švýcarsko — Sandstone canyon country of North Bohemia</li>
+      <li><span>I</span> Krkonoše — Bohemian Giant Mountains, UNESCO Biosphere Reserve</li>
+      <li><span>II</span> Šumava — Europe's largest contiguous forest, vital peat bogs</li>
+      <li><span>III</span> Beskydy — Carpathian foothills with Wallachian pastoral culture</li>
+      <li><span>IV</span> Jeseníky — Silesian highlands and rare glacial relict species</li>
+      <li><span>V</span> Česká Švýcarsko — Sandstone canyon country of North Bohemia</li>
     </ul>
-  </div>
-  <div class="czechia-image">
-    <img src="https://images.unsplash.com/photo-1541849546-216549ae216d?w=900&q=80" alt="Šumava forest landscape" />
   </div>
 </section>
 
-<!-- TEAM -->
-<section id="team">
-  <p class="section-label">The People</p>
-  <h2 class="section-title">Our team</h2>
-  <div class="team-grid">
-    <div class="team-card">
-      <img class="team-avatar" src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?w=200&q=80" alt="Jana Horáčková" />
-      <h4>Jana Horáčková</h4>
-      <p class="team-role">Executive Director</p>
+<!-- FOUNDERS -->
+<section id="founders">
+  <div class="founders-header">
+    <span class="label">The Founders</span>
+    <h2>The people<br><em>behind</em> Taro</h2>
+  </div>
+  <div class="founders-grid">
+    <div class="founder-card">
+      <div class="founder-photo">
+        <img
+          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=85"
+          alt="Daniel Štorcel"
+        />
+      </div>
+      <div class="founder-info">
+        <h3 class="founder-name">Daniel Štorcel</h3>
+        <p class="founder-role">Co-Founder &amp; Director</p>
+        <p class="founder-bio">
+          Daniel grew up between Fryšták and the Beskydy trails above it. A trained ecologist with a decade of field experience across Central European mountain ranges, he leads Taro's conservation science and international partnerships. His work is guided by the belief that ecology and culture are two languages describing the same place.
+        </p>
+      </div>
     </div>
-    <div class="team-card">
-      <img class="team-avatar" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=200&q=80" alt="Tomáš Blaha" />
-      <h4>Tomáš Bláha</h4>
-      <p class="team-role">Head of Ecology</p>
-    </div>
-    <div class="team-card">
-      <img class="team-avatar" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=200&q=80" alt="Markéta Siroková" />
-      <h4>Markéta Široková</h4>
-      <p class="team-role">Cultural Programmes</p>
-    </div>
-    <div class="team-card">
-      <img class="team-avatar" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=80" alt="Petr Novák" />
-      <h4>Petr Novák</h4>
-      <p class="team-role">Global Partnerships</p>
+    <div class="founder-card">
+      <div class="founder-photo">
+        <img
+          src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=400&q=85"
+          alt="Samuel Holík"
+        />
+      </div>
+      <div class="founder-info">
+        <h3 class="founder-name">Samuel Holík</h3>
+        <p class="founder-role">Co-Founder &amp; Head of Culture</p>
+        <p class="founder-bio">
+          Samuel is a cultural anthropologist and documentary maker from the Zlín region with a longstanding focus on intangible heritage in mountain communities. He leads Taro's archival, education, and community engagement programmes — and has spent years recording disappearing dialects and traditions across Moravia and beyond.
+        </p>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
 <section id="cta">
-  <p class="section-label">Get Involved</p>
-  <h2 class="section-title">Mountains need you</h2>
-  <p class="section-body">Whether you volunteer, donate, or spread the word — every act of support helps protect a peak, a culture, a way of life.</p>
-  <div class="btn-group">
-    <a href="#" class="btn btn-primary">Donate Now</a>
-    <a href="#" class="btn btn-outline">Become a Volunteer</a>
+  <div class="cta-bg"></div>
+  <div class="cta-content">
+    <span class="label">Get Involved</span>
+    <h2>Mountains<br><em>need</em> advocates</h2>
+    <p>Whether you volunteer, donate, or spread the word — every act of support helps protect a peak, a culture, a way of life. Taro is a registered NGO operating on transparent, community-accountable principles.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn-white">Donate</a>
+      <a href="#" class="link-ghost">Become a Volunteer</a>
+    </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-grid">
+  <div class="footer-top">
     <div>
-      <div class="footer-brand">Tar<span>o</span></div>
-      <p class="footer-desc">Czech NGO for mountain preservation and cultural heritage. Registered in Prague, working worldwide since 2018.</p>
+      <div class="footer-brand">Taro</div>
+      <p class="footer-tagline">Czech NGO for mountain preservation and cultural heritage. Registered in the Czech Republic, working worldwide.</p>
+      <p class="footer-address">
+        Fryšták, Zlínský kraj<br>
+        Czech Republic<br>
+        info@taro.cz
+      </p>
     </div>
     <div class="footer-col">
       <h5>Organisation</h5>
       <ul>
-        <li><a href="#mission">About Us</a></li>
-        <li><a href="#team">Our Team</a></li>
+        <li><a href="#mission">About Taro</a></li>
+        <li><a href="#founders">Founders</a></li>
         <li><a href="#">Annual Reports</a></li>
         <li><a href="#">Press</a></li>
       </ul>
@@ -835,28 +1061,19 @@
     <div class="footer-col">
       <h5>Work</h5>
       <ul>
-        <li><a href="#focus">Focus Areas</a></li>
+        <li><a href="#pillars">Focus Areas</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#czechia">Czech Mountains</a></li>
         <li><a href="#">Global Network</a></li>
       </ul>
     </div>
-    <div class="footer-col">
-      <h5>Contact</h5>
-      <ul>
-        <li><a href="#">info@taro.cz</a></li>
-        <li><a href="#">Náměstí Míru 14<br>Praha 2, 120 00</a></li>
-        <li><a href="#">+420 222 333 444</a></li>
-      </ul>
-    </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 Taro, z. s. · All rights reserved</span>
-    <div class="social-links">
+    <span>© 2026 Taro, z. s. — All rights reserved</span>
+    <div class="footer-socials">
       <a href="#">Instagram</a>
       <a href="#">Facebook</a>
       <a href="#">LinkedIn</a>
-      <a href="#">YouTube</a>
     </div>
   </div>
 </footer>
