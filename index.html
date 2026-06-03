@@ -6,7 +6,7 @@
   <title>Taro — Mountain Preservation & Culture</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -24,7 +24,7 @@
       --on-light-dim:  #7a96b0;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: auto; } /* we manage scroll manually */
 
     body {
       font-family: 'Inter', sans-serif;
@@ -35,68 +35,28 @@
       overflow-x: hidden;
     }
 
-    /* ── SCROLL ANIMATIONS ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    .reveal-left {
-      opacity: 0;
-      transform: translateX(-40px);
-      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal-left.visible { opacity: 1; transform: translateX(0); }
-
-    .reveal-right {
-      opacity: 0;
-      transform: translateX(40px);
-      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal-right.visible { opacity: 1; transform: translateX(0); }
-
-    .reveal-scale {
-      opacity: 0;
-      transform: scale(0.96);
-      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal-scale.visible { opacity: 1; transform: scale(1); }
-
-    .delay-1 { transition-delay: 0.1s; }
-    .delay-2 { transition-delay: 0.2s; }
-    .delay-3 { transition-delay: 0.32s; }
-    .delay-4 { transition-delay: 0.46s; }
-    .delay-5 { transition-delay: 0.6s; }
-
     /* ── NAV ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; align-items: center; justify-content: space-between;
       padding: 1.5rem 5vw;
-      border-bottom: 1px solid var(--navy-rule);
-      background: rgba(7,17,31,0.92);
-      backdrop-filter: blur(14px);
-      transition: padding 0.4s ease;
+      transition: padding 0.4s ease, background 0.4s ease, border-color 0.4s;
+      border-bottom: 1px solid transparent;
     }
 
-    nav.scrolled { padding: 1rem 5vw; }
+    nav.solid {
+      background: rgba(7,17,31,0.92);
+      backdrop-filter: blur(14px);
+      border-color: var(--navy-rule);
+      padding: 1rem 5vw;
+    }
 
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.4rem; font-weight: 400;
       letter-spacing: 0.25em; text-transform: uppercase;
       color: var(--white); text-decoration: none;
-      transition: opacity 0.2s;
     }
-
-    .nav-logo:hover { opacity: 0.7; }
 
     nav ul { list-style: none; display: flex; gap: 3rem; align-items: center; }
 
@@ -104,119 +64,113 @@
       color: var(--muted); text-decoration: none;
       font-size: 0.69rem; font-weight: 500;
       letter-spacing: 0.18em; text-transform: uppercase;
-      transition: color 0.25s;
-      position: relative;
+      transition: color 0.25s; position: relative;
     }
 
     nav a::after {
-      content: '';
-      position: absolute; bottom: -3px; left: 0; right: 0;
+      content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
       height: 1px; background: var(--accent);
       transform: scaleX(0); transform-origin: left;
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
     }
 
     nav a:hover { color: var(--white); }
     nav a:hover::after { transform: scaleX(1); }
     .nav-cta::after { display: none; }
+    .nav-cta { color: var(--white) !important; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 1px; }
 
-    .nav-cta {
-      color: var(--white) !important;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-      padding-bottom: 1px;
-    }
-
-    /* ── HERO ── */
+    /* ── HERO — full bleed with parallax ── */
     #hero {
+      position: relative;
       height: 100vh;
-      display: grid; grid-template-columns: 1fr 1fr;
       overflow: hidden;
+      display: flex; align-items: flex-end;
     }
 
-    .hero-left {
-      display: flex; flex-direction: column; justify-content: flex-end;
+    .hero-parallax {
+      position: absolute; inset: -15%;
+      will-change: transform;
+    }
+
+    .hero-parallax img {
+      width: 100%; height: 100%; object-fit: cover;
+      display: block;
+    }
+
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(7,17,31,0.92) 0%,
+        rgba(7,17,31,0.35) 50%,
+        rgba(7,17,31,0.1) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
       padding: 0 5vw 6rem;
-      background: var(--navy);
-      position: relative; z-index: 1;
+      width: 100%;
     }
 
     .hero-eyebrow {
       font-size: 0.67rem; letter-spacing: 0.24em; text-transform: uppercase;
-      color: var(--dim); font-weight: 500; margin-bottom: 2rem;
-      opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+      color: rgba(255,255,255,0.45); font-weight: 500; margin-bottom: 1.8rem;
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 0.9s 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
     }
 
     .hero-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(3.2rem, 4.8vw, 5.2rem);
-      font-weight: 300; line-height: 1.05;
-      color: var(--white);
-      opacity: 0; animation: fadeUp 1s 0.5s forwards;
+      font-size: clamp(3.5rem, 7vw, 7.5rem);
+      font-weight: 300; line-height: 1.0;
+      color: var(--white); max-width: 800px;
+      opacity: 0; transform: translateY(30px);
+      animation: fadeUp 1.1s 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
     }
 
     .hero-title em { font-style: italic; color: var(--accent); }
 
-    .hero-desc {
-      font-size: 0.88rem; color: var(--muted);
-      max-width: 380px; line-height: 1.85; font-weight: 300;
-      margin-top: 2.5rem; margin-bottom: 3rem;
-      opacity: 0; animation: fadeUp 0.9s 0.75s forwards;
+    .hero-sub {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-top: 3rem; padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      opacity: 0; animation: fadeUp 0.9s 0.9s cubic-bezier(0.16,1,0.3,1) forwards;
     }
 
-    .hero-links {
-      display: flex; gap: 2.5rem; align-items: center;
-      opacity: 0; animation: fadeUp 0.9s 0.95s forwards;
+    .hero-desc {
+      font-size: 0.9rem; color: var(--muted);
+      max-width: 420px; line-height: 1.85; font-weight: 300;
     }
+
+    .hero-links { display: flex; gap: 2rem; align-items: center; }
 
     .link-primary {
       font-size: 0.7rem; font-weight: 500; letter-spacing: 0.16em;
       text-transform: uppercase; color: var(--white); text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0.35); padding-bottom: 2px;
-      transition: opacity 0.25s, border-color 0.25s;
+      border-bottom: 1px solid rgba(255,255,255,0.4); padding-bottom: 2px;
+      transition: opacity 0.2s;
     }
-    .link-primary:hover { opacity: 0.55; }
+    .link-primary:hover { opacity: 0.5; }
 
     .link-muted {
       font-size: 0.7rem; letter-spacing: 0.13em; text-transform: uppercase;
-      color: var(--dim); text-decoration: none; transition: color 0.25s;
+      color: var(--dim); text-decoration: none; transition: color 0.2s;
     }
     .link-muted:hover { color: var(--muted); }
 
-    .hero-right {
-      position: relative; overflow: hidden;
-    }
-
-    .hero-right img {
-      position: absolute; inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover; object-position: center 30%;
-      transform: scale(1.06);
-      animation: heroZoom 8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    .hero-right::before {
-      content: ''; position: absolute; inset: 0; z-index: 1;
-      background: linear-gradient(to right, rgba(7,17,31,0.4), transparent 50%);
-    }
-
     .hero-tag {
-      position: absolute; bottom: 2rem; right: 2rem; z-index: 2;
+      position: absolute; bottom: 2rem; right: 5vw; z-index: 3;
       font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.35);
-      opacity: 0; animation: fadeIn 1s 1.5s forwards;
+      color: rgba(255,255,255,0.3);
+      opacity: 0; animation: fadeIn 1s 1.6s forwards;
     }
 
     @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
-      from { opacity: 0; transform: translateY(24px); }
     }
-
     @keyframes fadeIn {
-      to { opacity: 1; } from { opacity: 0; }
-    }
-
-    @keyframes heroZoom {
-      to { transform: scale(1); }
+      to { opacity: 1; }
     }
 
     /* ── STATS ── */
@@ -230,16 +184,17 @@
       padding: 2.5rem 2rem;
       border-right: 1px solid var(--navy-rule);
       display: flex; flex-direction: column; gap: 0.4rem;
+      opacity: 0; transform: translateY(20px);
       transition: background 0.3s;
     }
 
     .stat-item:last-child { border-right: none; }
     .stat-item:hover { background: rgba(95,154,184,0.06); }
+    .stat-item.visible { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s ease, background 0.3s; }
 
     .stat-number {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.8rem; font-weight: 300;
-      color: var(--white); line-height: 1;
+      font-size: 2.8rem; font-weight: 300; color: var(--white); line-height: 1;
     }
 
     .stat-label { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
@@ -257,77 +212,72 @@
     }
 
     h2 em { font-style: italic; color: var(--accent); }
-
     .rule { width: 36px; height: 1px; background: var(--navy-rule); margin: 2.5rem 0; }
-
     .body-text { font-size: 0.9rem; color: var(--muted); line-height: 1.9; font-weight: 300; }
 
-    /* ── MISSION ── */
-    #mission {
-      padding: 10rem 5vw;
+    /* ── ZOOM SECTION — image expands as you scroll ── */
+    .zoom-section {
+      position: relative;
+      padding: 8rem 5vw;
+      overflow: hidden;
+      border-bottom: 1px solid var(--navy-rule);
+    }
+
+    .zoom-section-content {
+      position: relative; z-index: 2;
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 8vw; align-items: center;
-      border-bottom: 1px solid var(--navy-rule);
     }
 
-    .mission-image {
-      position: relative; aspect-ratio: 3/4; overflow: hidden;
+    .zoom-image-wrap {
+      position: relative;
+      overflow: hidden;
+      will-change: transform;
     }
 
-    .mission-image img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    .zoom-image-wrap img {
+      width: 100%; display: block;
+      transform-origin: center center;
+      will-change: transform;
+      transition: none;
     }
 
-    .mission-image:hover img { transform: scale(1.04); }
-
-    .mission-image::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(7,17,31,0.3) 0%, transparent 60%);
-      pointer-events: none;
-    }
-
-    .mission-caption {
-      position: absolute; bottom: 1.2rem; left: 1.4rem; z-index: 1;
+    .zoom-caption {
+      position: absolute; bottom: 1.2rem; left: 1.4rem;
       font-size: 0.62rem; letter-spacing: 0.13em; text-transform: uppercase;
-      color: rgba(255,255,255,0.38);
+      color: rgba(255,255,255,0.38); z-index: 1;
     }
 
-    .mission-text > .body-text + .body-text { margin-top: 1.3rem; }
-
-    /* ── QUOTE ── */
-    .quote-block {
-      padding: 8rem 5vw;
+    /* ── QUOTE — parallax background ── */
+    .quote-section {
+      position: relative;
+      padding: 10rem 5vw;
+      overflow: hidden;
       border-bottom: 1px solid var(--navy-rule);
       display: flex; flex-direction: column; align-items: center; text-align: center;
-      position: relative; overflow: hidden;
     }
 
-    .quote-block::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(rgba(7,17,31,0.78), rgba(7,17,31,0.78)),
-        url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1600&q=80') center/cover no-repeat;
-      transform: scale(1.04);
-      transition: transform 8s ease;
+    .quote-bg {
+      position: absolute; inset: -20%;
+      will-change: transform;
     }
 
-    .quote-block:hover::before { transform: scale(1); }
+    .quote-bg img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: brightness(0.22) saturate(0.5);
+    }
 
     blockquote {
-      position: relative;
+      position: relative; z-index: 2;
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(1.8rem, 3.2vw, 2.8rem);
       font-weight: 300; font-style: italic;
-      color: rgba(255,255,255,0.7);
-      max-width: 700px; line-height: 1.45;
-      margin-bottom: 1.8rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 700px; line-height: 1.45; margin-bottom: 1.8rem;
     }
 
     .quote-attr {
-      position: relative;
+      position: relative; z-index: 2;
       font-size: 0.67rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--dim);
     }
 
@@ -347,8 +297,13 @@
       padding: 4rem 3.5rem;
       border-right: 1px solid var(--navy-rule);
       display: flex; flex-direction: column;
+      opacity: 0; transform: translateY(30px);
       transition: background 0.4s;
-      cursor: default;
+    }
+
+    .pillar-cell.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.8s ease, transform 0.8s ease, background 0.4s;
     }
 
     .pillar-cell:last-child { border-right: none; }
@@ -357,8 +312,7 @@
     .pillar-num {
       font-family: 'Cormorant Garamond', serif;
       font-size: 4.5rem; font-weight: 300;
-      color: rgba(255,255,255,0.04); line-height: 1;
-      margin-bottom: 3rem;
+      color: rgba(255,255,255,0.04); line-height: 1; margin-bottom: 3rem;
       transition: color 0.4s;
     }
 
@@ -367,52 +321,70 @@
     .pillar-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.7rem; font-weight: 400;
-      color: var(--white); margin-bottom: 1rem; line-height: 1.2;
-      transition: color 0.3s;
+      color: var(--white); margin-bottom: 1rem; line-height: 1.2; transition: color 0.3s;
     }
 
     .pillar-cell:hover .pillar-title { color: var(--accent); }
-
     .pillar-body { font-size: 0.84rem; color: var(--muted); line-height: 1.8; font-weight: 300; }
 
-    /* ── IMAGE ROW (3 curated photos) ── */
-    .image-row {
-      display: grid; grid-template-columns: 1fr 1.5fr 1fr;
-      height: 380px; gap: 2px;
-      border-bottom: 1px solid var(--navy-rule);
+    /* ── SCROLL-PINNED STRIP — 3 images reveal as you scroll ── */
+    .pinned-section {
+      position: relative;
+      height: 350vh; /* tall scroll space */
     }
 
-    .image-row-item {
-      position: relative; overflow: hidden;
+    .pinned-inner {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex; align-items: center;
     }
 
-    .image-row-item img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      filter: brightness(0.6) saturate(0.65);
-      transform: scale(1.04);
-      transition: filter 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    .pinned-track {
+      display: flex;
+      gap: 2px;
+      width: 100%;
+      padding: 0 5vw;
+      align-items: center;
     }
 
-    .image-row-item:hover img {
-      filter: brightness(0.8) saturate(0.85);
-      transform: scale(1);
+    .pinned-card {
+      flex: 0 0 calc(33.333% - 2px);
+      position: relative;
+      overflow: hidden;
+      border-radius: 0;
+      will-change: transform, opacity;
     }
 
-    .image-row-item span {
-      position: absolute; bottom: 1.2rem; left: 1.4rem;
-      font-size: 0.61rem; letter-spacing: 0.14em; text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      transition: color 0.3s;
+    .pinned-card img {
+      width: 100%;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.55) saturate(0.65);
+      transition: filter 0.5s;
     }
 
-    .image-row-item:hover span { color: rgba(255,255,255,0.65); }
+    .pinned-card:hover img { filter: brightness(0.75) saturate(0.85); }
+
+    .pinned-card-label {
+      position: absolute; bottom: 1.4rem; left: 1.4rem;
+      font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+    }
+
+    .pinned-title {
+      position: absolute; bottom: 3.2rem; left: 1.4rem; right: 1.4rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 300; color: var(--white); line-height: 1.3;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 0.5s, transform 0.5s;
+    }
+
+    .pinned-card.revealed .pinned-title { opacity: 1; transform: translateY(0); }
 
     /* ── PROJECTS ── */
-    #projects {
-      background: var(--off-white);
-      padding: 8rem 5vw;
-    }
-
+    #projects { background: var(--off-white); padding: 8rem 5vw; }
     #projects .label { color: var(--on-light-dim); }
     #projects h2 { color: var(--on-light); }
     #projects h2 em { color: #2d6285; }
@@ -429,58 +401,45 @@
     .link-dark-sm:hover { color: var(--on-light); }
 
     .project-table { width: 100%; border-collapse: collapse; }
-
     .project-table thead tr { border-bottom: 1px solid rgba(11,26,46,0.12); }
-
-    .project-table th {
-      font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--on-light-dim); font-weight: 500; padding: 0 0 1.2rem; text-align: left;
-    }
+    .project-table th { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--on-light-dim); font-weight: 500; padding: 0 0 1.2rem; text-align: left; }
 
     .project-table tbody tr {
       border-bottom: 1px solid rgba(11,26,46,0.07);
-      cursor: pointer;
-      transition: background 0.2s;
+      cursor: pointer; transition: background 0.2s;
+      opacity: 0; transform: translateX(-20px);
+    }
+
+    .project-table tbody tr.visible {
+      opacity: 1; transform: translateX(0);
+      transition: opacity 0.6s ease, transform 0.6s ease, background 0.2s;
     }
 
     .project-table tbody tr:hover { background: rgba(11,26,46,0.04); }
-
-    .project-table tbody tr td { transition: transform 0.2s; }
-
     .project-table td { padding: 1.8rem 0; font-size: 0.87rem; color: var(--on-light-mid); font-weight: 300; vertical-align: middle; }
-
     .project-table td:first-child { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: var(--on-light-dim); opacity: 0.4; width: 60px; }
 
     .project-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--on-light); margin-bottom: 0.15rem; transition: color 0.2s; }
     .project-table tbody tr:hover .project-name { color: #2d6285; }
-
     .project-col { font-size: 0.71rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-light-dim); white-space: nowrap; padding-right: 3rem; }
 
-    /* ── CZECHIA SPLIT ── */
+    /* ── CZECHIA ── */
     #czechia {
       display: grid; grid-template-columns: 1fr 1fr;
       min-height: 80vh;
       border-top: 1px solid var(--navy-rule);
     }
 
-    .czechia-image {
-      position: relative; overflow: hidden;
-    }
+    .czechia-image { position: relative; overflow: hidden; }
 
     .czechia-image img {
       width: 100%; height: 100%; object-fit: cover; display: block;
-      transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s;
       filter: brightness(0.7) saturate(0.75);
-    }
-
-    .czechia-image:hover img {
-      transform: scale(1.03);
-      filter: brightness(0.85) saturate(0.9);
+      will-change: transform;
     }
 
     .czechia-panel {
-      background: var(--navy-mid);
-      padding: 8rem 5vw;
+      background: var(--navy-mid); padding: 8rem 5vw;
       display: flex; flex-direction: column; justify-content: center;
       border-left: 1px solid var(--navy-rule);
     }
@@ -491,53 +450,43 @@
 
     .range-list li {
       display: flex; align-items: baseline; gap: 1.4rem;
-      padding: 1.1rem 0;
-      border-bottom: 1px solid var(--navy-rule);
+      padding: 1.1rem 0; border-bottom: 1px solid var(--navy-rule);
       font-size: 0.84rem; color: var(--muted); font-weight: 300;
+      opacity: 0; transform: translateX(-16px);
       transition: color 0.25s, padding-left 0.3s;
       cursor: default;
     }
 
-    .range-list li:hover { color: rgba(255,255,255,0.7); padding-left: 0.4rem; }
-
-    .range-list li span {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.72rem; color: var(--dim); width: 18px; flex-shrink: 0;
-      transition: color 0.25s;
+    .range-list li.visible {
+      opacity: 1; transform: translateX(0);
+      transition: opacity 0.6s ease, transform 0.6s ease, color 0.25s, padding-left 0.3s;
     }
 
+    .range-list li:hover { color: rgba(255,255,255,0.7); padding-left: 0.5rem; }
+    .range-list li span { font-family: 'Cormorant Garamond', serif; font-size: 0.72rem; color: var(--dim); width: 18px; flex-shrink: 0; transition: color 0.25s; }
     .range-list li:hover span { color: var(--accent); }
 
     /* ── FOUNDERS ── */
-    #founders {
-      padding: 9rem 5vw;
-      border-top: 1px solid var(--navy-rule);
-      border-bottom: 1px solid var(--navy-rule);
-    }
-
+    #founders { padding: 9rem 5vw; border-top: 1px solid var(--navy-rule); border-bottom: 1px solid var(--navy-rule); }
     .founders-header { margin-bottom: 6rem; }
-
     .founders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--navy-rule); }
 
     .founder-cell {
-      background: var(--navy);
-      padding: 4rem;
+      background: var(--navy); padding: 4rem;
+      opacity: 0; transform: translateY(24px);
       transition: background 0.4s;
+    }
+
+    .founder-cell.visible {
+      opacity: 1; transform: translateY(0);
+      transition: opacity 0.8s ease, transform 0.8s ease, background 0.4s;
     }
 
     .founder-cell:hover { background: var(--navy-mid); }
 
-    .founder-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 2rem; font-weight: 400;
-      color: var(--white); margin-bottom: 0.35rem; line-height: 1.1;
-      transition: color 0.3s;
-    }
-
+    .founder-name { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; color: var(--white); margin-bottom: 0.35rem; line-height: 1.1; transition: color 0.3s; }
     .founder-cell:hover .founder-name { color: var(--accent); }
-
     .founder-role { font-size: 0.67rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
-
     .founder-bio { font-size: 0.86rem; color: var(--muted); line-height: 1.9; font-weight: 300; }
 
     /* ── CTA ── */
@@ -550,27 +499,24 @@
     }
 
     .cta-bg {
-      position: absolute; inset: 0;
-      background:
-        linear-gradient(rgba(7,17,31,0.88), rgba(7,17,31,0.88)),
-        url('https://images.unsplash.com/photo-1589182337358-2cb63099350c?w=1600&q=80') center/cover no-repeat;
-      transition: transform 8s ease;
+      position: absolute; inset: -10%;
+      will-change: transform;
     }
 
-    #cta:hover .cta-bg { transform: scale(1.02); }
+    .cta-bg img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: brightness(0.12) saturate(0.4);
+    }
 
     #cta h2 { position: relative; font-size: clamp(2.8rem, 5vw, 5rem); }
-
     .cta-right { position: relative; display: flex; flex-direction: column; gap: 1.5rem; }
-
     .cta-actions { display: flex; gap: 2.5rem; align-items: center; margin-top: 0.5rem; }
 
     .btn-solid {
       display: inline-block; padding: 0.9rem 2.6rem;
       background: var(--white); color: var(--navy);
       font-size: 0.7rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
-      text-decoration: none;
-      transition: opacity 0.25s, transform 0.25s;
+      text-decoration: none; transition: opacity 0.25s, transform 0.25s;
     }
 
     .btn-solid:hover { opacity: 0.85; transform: translateY(-2px); }
@@ -584,17 +530,8 @@
     .link-ghost:hover { color: var(--muted); border-color: rgba(255,255,255,0.2); }
 
     /* ── FOOTER ── */
-    footer {
-      background: var(--navy); color: var(--dim);
-      padding: 5rem 5vw 3rem;
-    }
-
-    .footer-top {
-      display: grid; grid-template-columns: 2fr 1fr 1fr;
-      gap: 4rem; padding-bottom: 4rem;
-      border-bottom: 1px solid var(--navy-rule);
-    }
-
+    footer { background: var(--navy); color: var(--dim); padding: 5rem 5vw 3rem; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem; padding-bottom: 4rem; border-bottom: 1px solid var(--navy-rule); }
     .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; letter-spacing: 0.25em; text-transform: uppercase; color: var(--white); margin-bottom: 1.2rem; }
     .footer-tagline { font-size: 0.82rem; line-height: 1.8; max-width: 270px; font-weight: 300; }
     .footer-address { margin-top: 1.5rem; font-size: 0.75rem; line-height: 2; letter-spacing: 0.04em; }
@@ -603,7 +540,6 @@
     .footer-col li { margin-bottom: 0.8rem; }
     .footer-col a { color: var(--dim); text-decoration: none; font-size: 0.82rem; font-weight: 300; transition: color 0.2s; }
     .footer-col a:hover { color: var(--muted); }
-
     .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2.5rem; font-size: 0.7rem; letter-spacing: 0.06em; }
     .footer-socials { display: flex; gap: 2rem; }
     .footer-socials a { color: var(--dim); text-decoration: none; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.2s; }
@@ -611,30 +547,25 @@
 
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
-      #hero, #mission, #czechia, #cta { grid-template-columns: 1fr; }
-      #hero { height: auto; }
-      .hero-left { padding: 9rem 5vw 5rem; min-height: 70vh; }
-      .hero-right { height: 55vw; }
-      .mission-image { aspect-ratio: 16/9; }
+      .zoom-section-content, #czechia, #cta { grid-template-columns: 1fr; }
       .pillars-header { grid-template-columns: 1fr; }
       .pillars-grid { grid-template-columns: 1fr; }
       .pillar-cell { border-right: none; border-bottom: 1px solid var(--navy-rule); }
       .pillar-cell:last-child { border-bottom: none; }
       .czechia-image { height: 50vw; }
-      .image-row { grid-template-columns: 1fr 1fr; height: auto; }
-      .image-row-item { height: 240px; }
-      .image-row-item:last-child { display: none; }
       #stats { grid-template-columns: repeat(3, 1fr); }
       .founders-grid { grid-template-columns: 1fr; }
       .footer-top { grid-template-columns: 1fr 1fr; }
+      .pinned-section { height: auto; }
+      .pinned-inner { position: relative; height: auto; padding: 5rem 0; }
+      .pinned-track { flex-direction: column; padding: 0 5vw; }
+      .pinned-card { flex: none; width: 100%; }
+      .pinned-card img { height: 60vw; }
     }
 
     @media (max-width: 700px) {
       nav ul { display: none; }
-      .hero-title { font-size: clamp(3rem, 12vw, 5rem); }
       #stats { grid-template-columns: 1fr 1fr; }
-      .image-row { grid-template-columns: 1fr; }
-      .image-row-item:last-child { display: block; }
       .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 1.2rem; }
       .founder-cell { padding: 2.5rem 2rem; }
@@ -656,79 +587,86 @@
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- HERO — parallax image -->
 <section id="hero">
-  <div class="hero-left">
+  <div class="hero-parallax" id="hero-parallax">
+    <img src="https://images.unsplash.com/photo-1568831153277-6862cfdd6547?w=1600&q=90" alt="Krkonoše mountains, Czech Republic" />
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
     <p class="hero-eyebrow">Fryšták, Czech Republic &nbsp;&middot;&nbsp; Est. 2018</p>
     <h1 class="hero-title">
-      Protecting<br>mountains.<br>
-      <em>Preserving</em><br>cultures.
+      Protecting mountains.<br><em>Preserving</em> cultures.
     </h1>
-    <p class="hero-desc">
-      Taro is a Czech non-governmental organisation dedicated to the long-term stewardship of mountain ecosystems and the living cultures shaped by them — in Czechia and across the world.
-    </p>
-    <div class="hero-links">
-      <a href="#mission" class="link-primary">Our Mission</a>
-      <a href="#projects" class="link-muted">View Projects</a>
+    <div class="hero-sub">
+      <p class="hero-desc">
+        Taro is a Czech non-governmental organisation dedicated to the long-term stewardship of mountain ecosystems and the living cultures shaped by them — in Czechia and across the world.
+      </p>
+      <div class="hero-links">
+        <a href="#mission" class="link-primary">Our Mission</a>
+        <a href="#projects" class="link-muted">View Projects</a>
+      </div>
     </div>
   </div>
-  <div class="hero-right">
-    <img src="https://images.unsplash.com/photo-1568831153277-6862cfdd6547?w=1400&q=90" alt="Krkonoše mountains, Czech Republic" />
-    <span class="hero-tag">Krkonoše, Czech Republic</span>
-  </div>
+  <span class="hero-tag">Krkonoše, Czech Republic</span>
 </section>
 
 <!-- STATS -->
 <div id="stats">
-  <div class="stat-item reveal delay-1"><span class="stat-number">12</span><span class="stat-label">Mountain ranges</span></div>
-  <div class="stat-item reveal delay-2"><span class="stat-number">4 800</span><span class="stat-label">People engaged yearly</span></div>
-  <div class="stat-item reveal delay-3"><span class="stat-number">38</span><span class="stat-label">Active projects</span></div>
-  <div class="stat-item reveal delay-4"><span class="stat-number">3</span><span class="stat-label">Continents</span></div>
-  <div class="stat-item reveal delay-5"><span class="stat-number">97%</span><span class="stat-label">Funding to programmes</span></div>
+  <div class="stat-item"><span class="stat-number">12</span><span class="stat-label">Mountain ranges</span></div>
+  <div class="stat-item"><span class="stat-number">4 800</span><span class="stat-label">People engaged yearly</span></div>
+  <div class="stat-item"><span class="stat-number">38</span><span class="stat-label">Active projects</span></div>
+  <div class="stat-item"><span class="stat-number">3</span><span class="stat-label">Continents</span></div>
+  <div class="stat-item"><span class="stat-number">97%</span><span class="stat-label">Funding to programmes</span></div>
 </div>
 
-<!-- MISSION -->
-<section id="mission">
-  <div class="mission-image reveal-left">
-    <img src="https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=900&q=85" alt="Šumava primeval forest" />
-    <span class="mission-caption">Šumava National Park, South Bohemia</span>
-  </div>
-  <div class="mission-text reveal-right">
-    <span class="label">Who We Are</span>
-    <h2>A Czech voice for<br>the world's <em>mountains</em></h2>
-    <div class="rule"></div>
-    <p class="body-text">Founded in Fryšták in 2018 and rooted in the foothills of the Beskydy range, Taro was built on a simple conviction: that mountain landscapes and mountain cultures are inseparable. Lose one and you lose the other.</p>
-    <p class="body-text" style="margin-top:1.3rem;">We work at the intersection of environmental science, intangible cultural heritage, and community empowerment — connecting local knowledge in the Czech highlands with global mountain conservation movements from the Andes to the Himalayas.</p>
+<!-- MISSION — scroll zoom image -->
+<section id="mission" class="zoom-section">
+  <div class="zoom-section-content">
+    <div class="zoom-image-wrap" id="zoom-mission">
+      <img src="https://images.unsplash.com/photo-1586348943529-beaae6c28db9?w=900&q=85" alt="Šumava primeval forest" id="zoom-mission-img" style="aspect-ratio:3/4;object-fit:cover;" />
+      <span class="zoom-caption">Šumava National Park, South Bohemia</span>
+    </div>
+    <div>
+      <span class="label">Who We Are</span>
+      <h2>A Czech voice for<br>the world's <em>mountains</em></h2>
+      <div class="rule"></div>
+      <p class="body-text">Founded in Fryšták in 2018 and rooted in the foothills of the Beskydy range, Taro was built on a simple conviction: that mountain landscapes and mountain cultures are inseparable. Lose one and you lose the other.</p>
+      <p class="body-text" style="margin-top:1.3rem;">We work at the intersection of environmental science, intangible cultural heritage, and community empowerment — connecting local knowledge in the Czech highlands with global conservation movements from the Andes to the Himalayas.</p>
+    </div>
   </div>
 </section>
 
-<!-- QUOTE over photo -->
-<div class="quote-block">
-  <blockquote class="reveal">"A mountain cannot be saved unless the people who live in its shadow are heard."</blockquote>
-  <span class="quote-attr reveal delay-2">Taro founding principle &nbsp;&middot;&nbsp; Fryšták, 2018</span>
+<!-- QUOTE — parallax background -->
+<div class="quote-section" id="quote-section">
+  <div class="quote-bg" id="quote-parallax">
+    <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1600&q=80" alt="Mountain landscape" />
+  </div>
+  <blockquote>"A mountain cannot be saved unless the people who live in its shadow are heard."</blockquote>
+  <span class="quote-attr">Taro founding principle &nbsp;&middot;&nbsp; Fryšták, 2018</span>
 </div>
 
 <!-- PILLARS -->
 <section id="pillars">
   <div class="pillars-header">
-    <div class="reveal-left">
+    <div>
       <span class="label">What We Do</span>
       <h2>Three pillars of<br><em>mountain stewardship</em></h2>
     </div>
-    <p class="body-text reveal-right">Our work spans ecology, culture, and community — because a mountain cannot be protected unless the people and traditions that define it are recognised and valued.</p>
+    <p class="body-text">Our work spans ecology, culture, and community — because a mountain cannot be protected unless the people and traditions that define it are recognised and valued.</p>
   </div>
   <div class="pillars-grid">
-    <div class="pillar-cell reveal delay-1">
+    <div class="pillar-cell">
       <span class="pillar-num">01</span>
       <h3 class="pillar-title">Ecosystem Preservation</h3>
       <p class="pillar-body">Restoring alpine meadows, peat bogs, and forest corridors threatened by climate change and unsustainable land use. We work alongside ecologists, land managers, and local farmers to rebuild what has been degraded.</p>
     </div>
-    <div class="pillar-cell reveal delay-2">
+    <div class="pillar-cell">
       <span class="pillar-num">02</span>
       <h3 class="pillar-title">Cultural Heritage</h3>
       <p class="pillar-body">Documenting and revitalising mountain dialects, pastoral traditions, vernacular architecture, and artisan knowledge. Culture is not a record of the past — it is a living system that must be actively sustained.</p>
     </div>
-    <div class="pillar-cell reveal delay-3">
+    <div class="pillar-cell">
       <span class="pillar-num">03</span>
       <h3 class="pillar-title">Community Stewardship</h3>
       <p class="pillar-body">Training local guides, educators, and municipal leaders to become long-term stewards of their mountain home. Lasting conservation only works when the people closest to the land are at its centre.</p>
@@ -736,76 +674,69 @@
   </div>
 </section>
 
-<!-- IMAGE ROW -->
-<div class="image-row">
-  <div class="image-row-item reveal-scale delay-1">
-    <img src="https://images.unsplash.com/photo-1570181567841-8b194a1d76a1?w=700&q=85" alt="Krkonoše ridge" />
-    <span>Krkonoše</span>
-  </div>
-  <div class="image-row-item reveal-scale delay-2">
-    <img src="https://images.unsplash.com/photo-1549880181-56a44cf4a9a5?w=900&q=85" alt="Beskydy hills, Moravia" />
-    <span>Beskydy</span>
-  </div>
-  <div class="image-row-item reveal-scale delay-3">
-    <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=700&q=85" alt="Jeseníky morning mist" />
-    <span>Jeseníky</span>
+<!-- PINNED SCROLL STRIP -->
+<div class="pinned-section" id="pinned-section">
+  <div class="pinned-inner" id="pinned-inner">
+    <div class="pinned-track" id="pinned-track">
+      <div class="pinned-card" id="pin-card-0">
+        <img src="https://images.unsplash.com/photo-1570181567841-8b194a1d76a1?w=800&q=85" alt="Krkonoše" style="height:65vh;" />
+        <span class="pinned-title">Krkonoše Alpine Meadow Revival</span>
+        <span class="pinned-card-label">Czechia &nbsp;&middot;&nbsp; Ecology</span>
+      </div>
+      <div class="pinned-card" id="pin-card-1">
+        <img src="https://images.unsplash.com/photo-1549880181-56a44cf4a9a5?w=800&q=85" alt="Beskydy" style="height:65vh;" />
+        <span class="pinned-title">Beskydy Living Folklore Archive</span>
+        <span class="pinned-card-label">Czechia &nbsp;&middot;&nbsp; Culture</span>
+      </div>
+      <div class="pinned-card" id="pin-card-2">
+        <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=800&q=85" alt="Jeseníky" style="height:65vh;" />
+        <span class="pinned-title">Himalayan Dialect Documentation</span>
+        <span class="pinned-card-label">Nepal &nbsp;&middot;&nbsp; Culture</span>
+      </div>
+    </div>
   </div>
 </div>
 
 <!-- PROJECTS -->
 <section id="projects">
   <div class="projects-head">
-    <div class="reveal-left">
+    <div>
       <span class="label">Selected Projects</span>
       <h2>Current <em>field work</em></h2>
     </div>
-    <a href="#cta" class="link-dark-sm reveal-right">All projects &rarr;</a>
+    <a href="#cta" class="link-dark-sm">All projects &rarr;</a>
   </div>
   <table class="project-table">
     <thead>
-      <tr class="reveal">
-        <th></th>
-        <th>Project</th>
-        <th>Location</th>
-        <th>Focus</th>
-        <th>Status</th>
+      <tr>
+        <th></th><th>Project</th><th>Location</th><th>Focus</th><th>Status</th>
       </tr>
     </thead>
     <tbody>
-      <tr class="reveal delay-1">
+      <tr>
         <td>01</td>
         <td><p class="project-name">Krkonoše Alpine Meadow Revival</p><p>Rewilding 340 hectares of degraded ridgeline meadows with native flora alongside farming communities.</p></td>
-        <td class="project-col">Czechia</td>
-        <td class="project-col">Ecology</td>
-        <td class="project-col">Active</td>
+        <td class="project-col">Czechia</td><td class="project-col">Ecology</td><td class="project-col">Active</td>
       </tr>
-      <tr class="reveal delay-2">
+      <tr>
         <td>02</td>
         <td><p class="project-name">Beskydy Living Folklore Archive</p><p>Recording oral histories, songs, and craft techniques from Wallachian mountain communities.</p></td>
-        <td class="project-col">Czechia</td>
-        <td class="project-col">Culture</td>
-        <td class="project-col">Active</td>
+        <td class="project-col">Czechia</td><td class="project-col">Culture</td><td class="project-col">Active</td>
       </tr>
-      <tr class="reveal delay-3">
+      <tr>
         <td>03</td>
         <td><p class="project-name">Andean Community Exchange</p><p>Connecting Czech mountain farmers with Quechua communities to share climate adaptation knowledge.</p></td>
-        <td class="project-col">Peru</td>
-        <td class="project-col">Partnership</td>
-        <td class="project-col">Active</td>
+        <td class="project-col">Peru</td><td class="project-col">Partnership</td><td class="project-col">Active</td>
       </tr>
-      <tr class="reveal delay-4">
+      <tr>
         <td>04</td>
         <td><p class="project-name">Šumava Peat Bog Restoration</p><p>Rehabilitating drained peat bogs to restore their role as carbon sinks and biodiversity refugia.</p></td>
-        <td class="project-col">Czechia</td>
-        <td class="project-col">Ecology</td>
-        <td class="project-col">Active</td>
+        <td class="project-col">Czechia</td><td class="project-col">Ecology</td><td class="project-col">Active</td>
       </tr>
-      <tr class="reveal delay-5">
+      <tr>
         <td>05</td>
         <td><p class="project-name">Himalayan Dialect Documentation</p><p>Partnering with Nepalese linguists to archive endangered mountain languages of the Khumbu region.</p></td>
-        <td class="project-col">Nepal</td>
-        <td class="project-col">Culture</td>
-        <td class="project-col">Active</td>
+        <td class="project-col">Nepal</td><td class="project-col">Culture</td><td class="project-col">Active</td>
       </tr>
     </tbody>
   </table>
@@ -813,15 +744,15 @@
 
 <!-- CZECHIA -->
 <section id="czechia">
-  <div class="czechia-image reveal-left">
-    <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=1000&q=85" alt="Beskydy hills, Zlínský kraj" />
+  <div class="czechia-image">
+    <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=1000&q=85" alt="Beskydy hills, Zlínský kraj" id="czechia-img" />
   </div>
-  <div class="czechia-panel reveal-right">
+  <div class="czechia-panel">
     <span class="label">Our Home</span>
     <h2>Rooted in<br><em>Moravian</em> hills</h2>
     <div class="rule"></div>
     <p class="body-text">Based in Fryšták — a small town in the Zlín region at the foot of the Beskydy range — Taro was shaped by the landscapes immediately outside its door. Czech mountain ranges are modest in elevation but immensely rich in biodiversity, folklore, and identity.</p>
-    <ul class="range-list" style="margin-top:2.5rem;">
+    <ul class="range-list" style="margin-top:2.5rem;" id="range-list">
       <li><span>I</span>Krkonoše — Bohemian Giant Mountains, UNESCO Biosphere Reserve</li>
       <li><span>II</span>Šumava — Europe's largest contiguous forest, vital peat bogs</li>
       <li><span>III</span>Beskydy — Carpathian foothills with Wallachian pastoral culture</li>
@@ -833,17 +764,17 @@
 
 <!-- FOUNDERS -->
 <section id="founders">
-  <div class="founders-header reveal">
+  <div class="founders-header">
     <span class="label">The Founders</span>
     <h2>The people<br><em>behind</em> Taro</h2>
   </div>
   <div class="founders-grid">
-    <div class="founder-cell reveal-left">
+    <div class="founder-cell">
       <h3 class="founder-name">Daniel Štorcel</h3>
       <p class="founder-role">Co-Founder &amp; Director</p>
       <p class="founder-bio">Daniel grew up between Fryšták and the Beskydy trails above it. A trained ecologist with a decade of field experience across Central European mountain ranges, he leads Taro's conservation science and international partnerships. His work is guided by the belief that ecology and culture are two languages describing the same place.</p>
     </div>
-    <div class="founder-cell reveal-right">
+    <div class="founder-cell">
       <h3 class="founder-name">Samuel Holík</h3>
       <p class="founder-role">Co-Founder &amp; Head of Culture</p>
       <p class="founder-bio">Samuel is a cultural anthropologist and documentary maker from the Zlín region with a longstanding focus on intangible heritage in mountain communities. He leads Taro's archival, education, and community engagement programmes — and has spent years recording disappearing dialects and traditions across Moravia and beyond.</p>
@@ -851,11 +782,13 @@
   </div>
 </section>
 
-<!-- CTA -->
+<!-- CTA — parallax background -->
 <section id="cta">
-  <div class="cta-bg"></div>
-  <h2 class="reveal-left">Mountains<br><em>need</em><br>advocates</h2>
-  <div class="cta-right reveal-right">
+  <div class="cta-bg" id="cta-parallax">
+    <img src="https://images.unsplash.com/photo-1589182337358-2cb63099350c?w=1600&q=80" alt="Mountain panorama" />
+  </div>
+  <h2>Mountains<br><em>need</em><br>advocates</h2>
+  <div class="cta-right">
     <p class="body-text">Whether you volunteer, donate, or spread the word — every act of support helps protect a peak, a culture, a way of life. Taro is a registered Czech NGO operating on transparent, community-accountable principles.</p>
     <div class="cta-actions">
       <a href="#" class="btn-solid">Donate</a>
@@ -902,24 +835,139 @@
 </footer>
 
 <script>
-  // Scroll shrink nav
-  const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
+  // ── Utilities ──────────────────────────────────────────────────────────────
+  function clamp(v, min, max) { return Math.min(Math.max(v, min), max); }
 
-  // Intersection observer for reveal animations
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
+  // progress of element through viewport: 0 = just entered bottom, 1 = just left top
+  function scrollProgress(el) {
+    const rect = el.getBoundingClientRect();
+    const vh = window.innerHeight;
+    return clamp((vh - rect.top) / (vh + rect.height), 0, 1);
+  }
+
+  // ── Nav solid on scroll ────────────────────────────────────────────────────
+  const nav = document.getElementById('main-nav');
+
+  // ── Parallax elements ─────────────────────────────────────────────────────
+  const heroParallax   = document.getElementById('hero-parallax');
+  const quoteParallax  = document.getElementById('quote-parallax');
+  const ctaParallax    = document.getElementById('cta-parallax');
+  const czechiaImg     = document.getElementById('czechia-img');
+
+  // ── Scroll-zoom image ─────────────────────────────────────────────────────
+  const zoomImg = document.getElementById('zoom-mission-img');
+
+  // ── Pinned strip ──────────────────────────────────────────────────────────
+  const pinnedSection = document.getElementById('pinned-section');
+  const cards = [
+    document.getElementById('pin-card-0'),
+    document.getElementById('pin-card-1'),
+    document.getElementById('pin-card-2'),
+  ];
+
+  // ── Intersection observer for one-shot reveals ────────────────────────────
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        // stagger children if needed
+        io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
 
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale')
-    .forEach(el => observer.observe(el));
+  document.querySelectorAll('.stat-item, .pillar-cell, .founder-cell, .project-table tbody tr')
+    .forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.07) + 's';
+      io.observe(el);
+    });
+
+  // range list items staggered
+  document.querySelectorAll('#range-list li').forEach((li, i) => {
+    li.style.transitionDelay = (i * 0.09) + 's';
+    io.observe(li);
+  });
+
+  // ── rAF scroll loop ───────────────────────────────────────────────────────
+  let ticking = false;
+
+  function onScroll() {
+    if (!ticking) {
+      requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+
+  function update() {
+    const sy = window.scrollY;
+    const vh = window.innerHeight;
+
+    // Nav
+    nav.classList.toggle('solid', sy > 40);
+
+    // Hero parallax — moves slower than scroll (0.4× speed)
+    heroParallax.style.transform = `translateY(${sy * 0.38}px)`;
+
+    // Quote parallax
+    const quoteProg = scrollProgress(document.getElementById('quote-section'));
+    const quoteShift = (quoteProg - 0.5) * -160;
+    quoteParallax.style.transform = `translateY(${quoteShift}px)`;
+
+    // CTA parallax
+    const ctaEl = document.getElementById('cta');
+    const ctaProg = scrollProgress(ctaEl);
+    ctaParallax.style.transform = `translateY(${(ctaProg - 0.5) * -120}px)`;
+
+    // Czechia parallax
+    const czechProg = scrollProgress(czechiaImg.parentElement);
+    czechiaImg.style.transform = `translateY(${(czechProg - 0.5) * -80}px) scale(1.08)`;
+
+    // Scroll-zoom mission image: scale from 1.0 → 1.12 as section passes through
+    const missionEl = document.getElementById('mission');
+    const mProg = scrollProgress(missionEl);
+    const scale = 1 + mProg * 0.1;
+    zoomImg.style.transform = `scale(${scale})`;
+
+    // Pinned strip
+    if (pinnedSection) {
+      const rect = pinnedSection.getBoundingClientRect();
+      const total = pinnedSection.offsetHeight - vh;
+      const pinProg = clamp(-rect.top / total, 0, 1); // 0→1 over the tall section
+
+      // Each card reveals at different scroll thresholds
+      // card 0: 0–0.33, card 1: 0.2–0.6, card 2: 0.5–1.0
+      const thresholds = [
+        [0.0, 0.28],
+        [0.25, 0.62],
+        [0.55, 1.0],
+      ];
+
+      cards.forEach((card, i) => {
+        const [start, end] = thresholds[i];
+        const p = clamp((pinProg - start) / (end - start), 0, 1);
+        const ease = p < 0.5 ? 2*p*p : -1+(4-2*p)*p; // easeInOut
+
+        // scale from 0.82 → 1, opacity 0 → 1, translateY 60 → 0
+        const sc = 0.82 + ease * 0.18;
+        const op = ease;
+        const ty = (1 - ease) * 60;
+
+        card.style.transform = `translateY(${ty}px) scale(${sc})`;
+        card.style.opacity = op;
+
+        if (p > 0.5) {
+          card.classList.add('revealed');
+        } else {
+          card.classList.remove('revealed');
+        }
+      });
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  update(); // run once on load
 </script>
 </body>
 </html>
