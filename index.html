@@ -194,10 +194,11 @@
 
     .stat-number {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 2.8rem; font-weight: 300; color: var(--white); line-height: 1;
+      font-size: 2.8rem; font-weight: 400; color: #ffffff; line-height: 1;
+      text-shadow: 0 0 40px rgba(255,255,255,0.15);
     }
 
-    .stat-label { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
+    .stat-label { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
 
     /* ── SHARED ── */
     .label {
@@ -330,7 +331,7 @@
     /* ── SCROLL-PINNED STRIP — 3 images reveal as you scroll ── */
     .pinned-section {
       position: relative;
-      height: 350vh; /* tall scroll space */
+      height: 550vh; /* tall scroll space */
     }
 
     .pinned-inner {
@@ -937,9 +938,9 @@
       // Each card reveals at different scroll thresholds
       // card 0: 0–0.33, card 1: 0.2–0.6, card 2: 0.5–1.0
       const thresholds = [
-        [0.0, 0.28],
-        [0.25, 0.62],
-        [0.55, 1.0],
+        [0.0, 0.22],
+        [0.28, 0.58],
+        [0.64, 1.0],
       ];
 
       cards.forEach((card, i) => {
