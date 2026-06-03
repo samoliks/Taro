@@ -11,17 +11,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:      #07111f;
-      --navy-mid:  #0e1e32;
-      --navy-rule: rgba(255,255,255,0.08);
-      --accent:    #5f9ab8;
-      --white:     #ffffff;
-      --off-white: #f1f3f6;
-      --muted:     rgba(255,255,255,0.42);
-      --dim:       rgba(255,255,255,0.15);
-      --on-light:      #07111f;
-      --on-light-mid:  #3a526a;
-      --on-light-dim:  #7a96b0;
+      --navy:      #2c3a48;
+      --navy-mid:  #3a4a5a;
+      --navy-rule: rgba(255,255,255,0.1);
+      --accent:    #7a9daa;
+      --white:     #f8f7f4;
+      --off-white: #eeecea;
+      --muted:     rgba(255,255,255,0.55);
+      --dim:       rgba(255,255,255,0.28);
+      --on-light:      #2c3a48;
+      --on-light-mid:  #5a6e7e;
+      --on-light-dim:  #8fa4b0;
     }
 
     html { scroll-behavior: auto; } /* we manage scroll manually */
@@ -45,7 +45,7 @@
     }
 
     nav.solid {
-      background: rgba(7,17,31,0.92);
+      background: rgba(44,58,72,0.92);
       backdrop-filter: blur(14px);
       border-color: var(--navy-rule);
       padding: 1rem 5vw;
@@ -101,9 +101,9 @@
       position: absolute; inset: 0;
       background: linear-gradient(
         to top,
-        rgba(7,17,31,0.92) 0%,
-        rgba(7,17,31,0.35) 50%,
-        rgba(7,17,31,0.1) 100%
+        rgba(44,58,72,0.92) 0%,
+        rgba(44,58,72,0.35) 50%,
+        rgba(44,58,72,0.1) 100%
       );
     }
 
@@ -189,7 +189,7 @@
     }
 
     .stat-item:last-child { border-right: none; }
-    .stat-item:hover { background: rgba(95,154,184,0.06); }
+    .stat-item:hover { background: rgba(122,157,170,0.06); }
     .stat-item.visible { opacity: 1; transform: translateY(0); transition: opacity 0.7s ease, transform 0.7s ease, background 0.3s; }
 
     .stat-number {
@@ -316,7 +316,7 @@
       transition: color 0.4s;
     }
 
-    .pillar-cell:hover .pillar-num { color: rgba(95,154,184,0.12); }
+    .pillar-cell:hover .pillar-num { color: rgba(122,157,170,0.12); }
 
     .pillar-title {
       font-family: 'Cormorant Garamond', serif;
@@ -387,7 +387,7 @@
     #projects { background: var(--off-white); padding: 8rem 5vw; }
     #projects .label { color: var(--on-light-dim); }
     #projects h2 { color: var(--on-light); }
-    #projects h2 em { color: #2d6285; }
+    #projects h2 em { color: #5a8090; }
 
     .projects-head {
       display: flex; justify-content: space-between; align-items: flex-end;
@@ -401,11 +401,11 @@
     .link-dark-sm:hover { color: var(--on-light); }
 
     .project-table { width: 100%; border-collapse: collapse; }
-    .project-table thead tr { border-bottom: 1px solid rgba(11,26,46,0.12); }
+    .project-table thead tr { border-bottom: 1px solid rgba(44,58,72,0.12); }
     .project-table th { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--on-light-dim); font-weight: 500; padding: 0 0 1.2rem; text-align: left; }
 
     .project-table tbody tr {
-      border-bottom: 1px solid rgba(11,26,46,0.07);
+      border-bottom: 1px solid rgba(44,58,72,0.07);
       cursor: pointer; transition: background 0.2s;
       opacity: 0; transform: translateX(-20px);
     }
@@ -415,12 +415,12 @@
       transition: opacity 0.6s ease, transform 0.6s ease, background 0.2s;
     }
 
-    .project-table tbody tr:hover { background: rgba(11,26,46,0.04); }
+    .project-table tbody tr:hover { background: rgba(44,58,72,0.04); }
     .project-table td { padding: 1.8rem 0; font-size: 0.87rem; color: var(--on-light-mid); font-weight: 300; vertical-align: middle; }
     .project-table td:first-child { font-family: 'Cormorant Garamond', serif; font-size: 0.9rem; color: var(--on-light-dim); opacity: 0.4; width: 60px; }
 
     .project-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 400; color: var(--on-light); margin-bottom: 0.15rem; transition: color 0.2s; }
-    .project-table tbody tr:hover .project-name { color: #2d6285; }
+    .project-table tbody tr:hover .project-name { color: #5a8090; }
     .project-col { font-size: 0.71rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--on-light-dim); white-space: nowrap; padding-right: 3rem; }
 
     /* ── CZECHIA ── */
