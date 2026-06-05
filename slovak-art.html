@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Slovak Art — An Exploration</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f0ede8;
+      --ink: #1a1a18;
+      --mid: #6b6660;
+      --accent: #8b6f4e;
+      --rule: rgba(26,26,24,0.12);
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── ROCK ─────────────────────────────────────────────── */
+    #rock-wrap {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    #rock {
+      position: absolute;
+      width: 180px;
+      height: 155px;
+      pointer-events: auto;
+      cursor: grab;
+      user-select: none;
+      filter: drop-shadow(0 18px 40px rgba(0,0,0,0.35));
+      will-change: transform;
+      transform-origin: center center;
+    }
+
+    #rock:active { cursor: grabbing; }
+
+    #rock svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ── LAYOUT ───────────────────────────────────────────── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 40px 120px;
+    }
+
+    /* ── HERO ─────────────────────────────────────────────── */
+    .hero {
+      padding: 140px 0 100px;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 300;
+      line-height: 1.0;
+      color: var(--ink);
+      margin-bottom: 36px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--mid);
+      max-width: 520px;
+    }
+
+    /* ── SECTIONS ─────────────────────────────────────────── */
+    .section {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-num {
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 28px;
+    }
+
+    .section h2 em { font-style: italic; }
+
+    .section p {
+      font-size: 15px;
+      line-height: 1.85;
+      color: var(--mid);
+      max-width: 640px;
+      margin-bottom: 20px;
+    }
+
+    .section p:last-child { margin-bottom: 0; }
+
+    /* ── ARTIST GRID ──────────────────────────────────────── */
+    .artists {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 2px;
+      margin-top: 48px;
+    }
+
+    .artist-card {
+      background: #e8e3dc;
+      padding: 32px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .artist-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--accent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .artist-card:hover::before { opacity: 1; }
+
+    .artist-era {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .artist-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+
+    .artist-desc {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--mid);
+    }
+
+    /* ── QUOTE ────────────────────────────────────────────── */
+    .quote-block {
+      padding: 80px 0;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 3.5vw, 44px);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.35;
+      color: var(--ink);
+      padding-left: 32px;
+      border-left: 2px solid var(--accent);
+      max-width: 680px;
+    }
+
+    blockquote cite {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      font-style: normal;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 22px;
+    }
+
+    /* ── MOVEMENTS ────────────────────────────────────────── */
+    .timeline {
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      gap: 32px;
+      padding: 24px 0;
+      border-top: 1px solid var(--rule);
+      align-items: start;
+    }
+
+    .timeline-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--accent);
+      padding-top: 2px;
+    }
+
+    .timeline-content h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+
+    .timeline-content p {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--mid);
+    }
+
+    /* ── IMAGES ───────────────────────────────────────────── */
+    .img-full {
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      height: 520px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .img-full img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 55%;
+      display: block;
+    }
+
+    .img-full figcaption {
+      position: absolute;
+      bottom: 20px;
+      right: 28px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+
+    .img-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      margin: 48px 0 0;
+    }
+
+    .img-pair figure {
+      overflow: hidden;
+      height: 280px;
+    }
+
+    .img-pair figure img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .img-pair figure:hover img { transform: scale(1.03); }
+
+    .img-side {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      margin-top: 48px;
+    }
+
+    .img-side figure {
+      overflow: hidden;
+    }
+
+    .img-side figure img {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      object-position: center 40%;
+      display: block;
+    }
+
+    .img-side-text { padding-top: 8px; }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    .footer {
+      padding: 60px 0 0;
+      font-size: 12px;
+      color: var(--mid);
+      letter-spacing: 0.06em;
+    }
+
+    /* ── ROCK TOOLTIP ─────────────────────────────────────── */
+    #rock-hint {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--mid);
+      pointer-events: none;
+      z-index: 200;
+      opacity: 1;
+      transition: opacity 1s;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ROCK -->
+<div id="rock-wrap">
+  <div id="rock">
+    <svg viewBox="0 0 180 155" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="rg" cx="38%" cy="32%" r="68%">
+          <stop offset="0%"   stop-color="#d4c8b8"/>
+          <stop offset="40%"  stop-color="#a8997f"/>
+          <stop offset="75%"  stop-color="#7a6c55"/>
+          <stop offset="100%" stop-color="#4a3e2e"/>
+        </radialGradient>
+        <radialGradient id="rg2" cx="60%" cy="60%" r="50%">
+          <stop offset="0%"   stop-color="#c2b49a" stop-opacity="0.4"/>
+          <stop offset="100%" stop-color="#4a3e2e" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9 0.7" numOctaves="4" seed="8" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="3.5" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+        <filter id="shadow" x="-20%" y="-20%" width="140%" height="160%">
+          <feGaussianBlur in="SourceAlpha" stdDeviation="8" result="blur"/>
+          <feOffset dx="4" dy="10" result="off"/>
+          <feComposite in="SourceGraphic" in2="off" operator="over"/>
+        </filter>
+      </defs>
+
+      <!-- main rock silhouette -->
+      <g filter="url(#rough)">
+        <polygon
+          points="88,4 138,18 166,52 162,98 140,138 88,150 40,142 12,108 8,64 28,26 68,8"
+          fill="url(#rg)"
+        />
+        <!-- highlight facets -->
+        <polygon points="88,4 138,18 112,32 72,22 68,8"   fill="rgba(255,255,255,0.22)"/>
+        <polygon points="138,18 166,52 148,60 112,32"      fill="rgba(255,255,255,0.10)"/>
+        <polygon points="8,64 28,26 68,8 72,22 42,44"      fill="rgba(255,255,255,0.14)"/>
+        <!-- dark shadow facets -->
+        <polygon points="162,98 140,138 88,150 100,118 148,100" fill="rgba(0,0,0,0.18)"/>
+        <polygon points="40,142 12,108 8,64 42,44 42,112"   fill="rgba(0,0,0,0.14)"/>
+        <!-- mid tones -->
+        <polygon points="72,22 112,32 148,60 120,88 100,118 88,150 40,142 42,112 42,44" fill="url(#rg2)"/>
+        <!-- crack lines -->
+        <line x1="112" y1="32" x2="100" y2="118" stroke="rgba(0,0,0,0.18)" stroke-width="1.2" stroke-linecap="round"/>
+        <line x1="72"  y1="22" x2="42"  y2="112" stroke="rgba(0,0,0,0.12)" stroke-width="0.8" stroke-linecap="round"/>
+        <line x1="148" y1="60" x2="120" y2="88"  stroke="rgba(0,0,0,0.10)" stroke-width="0.7" stroke-linecap="round"/>
+        <line x1="88"  y1="80" x2="120" y2="88"  stroke="rgba(0,0,0,0.09)" stroke-width="0.6"/>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<div id="rock-hint">drag the rock</div>
+
+<!-- FULL-BLEED HERO IMAGE -->
+<figure class="img-full" style="margin-bottom:0;">
+  <img src="tatry.jpeg" alt="Tatry mountains" />
+  <figcaption>High Tatras, Slovakia</figcaption>
+</figure>
+
+<!-- CONTENT -->
+<div class="page">
+
+  <section class="hero">
+    <p class="hero-label">Visual Culture of Slovakia</p>
+    <h1>Art from the<br><em>Heart of Europe</em></h1>
+    <p class="hero-sub">From Baroque altarpieces in mountain chapels to the turbulent modernisms of the 20th century — Slovak art carries the weight of a land shaped by empire, folklore, and fierce independence.</p>
+  </section>
+
+  <section class="section">
+    <p class="section-num">01 — Origins</p>
+    <h2>A Land Between<br><em>Empires</em></h2>
+    <p>For centuries the territory of present-day Slovakia existed at the crossroads of Habsburg authority and Carpathian folk tradition. This tension produced a visual culture of striking duality: refined court-influenced painting in Bratislava's palaces, and vivid naive iconography in remote village churches.</p>
+    <p>The earliest significant artistic monuments are the Gothic panel paintings of the Spiš region — workshops active from the 14th century producing altarpieces of extraordinary technical precision, their gold grounds glinting in the thin mountain light. Master Paul of Levoča stands as the supreme figure of this era, his carved wooden altars among the largest and most intricate in Central Europe.</p>
+  </section>
+
+  <section class="section">
+    <p class="section-num">02 — Notable Artists</p>
+    <h2>Figures Who<br><em>Defined</em> the Canon</h2>
+    <p>Several artists crystallised distinctly Slovak sensibilities across very different moments in history.</p>
+
+    <div class="artists">
+      <div class="artist-card">
+        <p class="artist-era">c. 1470 – 1537</p>
+        <h3 class="artist-name">Master Paul of Levoča</h3>
+        <p class="artist-desc">Gothic sculptor whose monumental carved altarpiece in the Basilica of St. James, Levoča, remains the tallest wooden Gothic altar in the world at 18.6 metres.</p>
+      </div>
+      <div class="artist-card">
+        <p class="artist-era">1869 – 1936</p>
+        <h3 class="artist-name">Joža Uprka</h3>
+        <p class="artist-desc">Moravian-Slovak sculptor celebrated for his dynamic bronzes of folk life — galloping horsemen, dancing women — capturing the energy of Carpathian rural culture at the turn of the century.</p>
+      </div>
+      <div class="artist-card">
+        <p class="artist-era">1880 – 1949</p>
+        <h3 class="artist-name">Martin Benka</h3>
+        <p class="artist-desc">Painter and illustrator considered a father of modern Slovak visual art. His sweeping panoramas of the Tatras and scenes of peasant life defined an enduring national visual vocabulary.</p>
+      </div>
+      <div class="artist-card">
+        <p class="artist-era">1909 – 1971</p>
+        <h3 class="artist-name">Ľudovít Fulla</h3>
+        <p class="artist-desc">Modernist painter who fused Cubist and Fauvist influences with Slovak folk motifs. His bold colour and geometric simplification remain among the most distinctive Slovak contributions to European modernism.</p>
+      </div>
+      <div class="artist-card">
+        <p class="artist-era">1920 – 1987</p>
+        <h3 class="artist-name">Mikuláš Galanda</h3>
+        <p class="artist-desc">Co-founder of the groundbreaking Galanda-Fulla artistic partnership. His intimate figure paintings and prints introduced a lyrical expressionism that pushed against the academic conventions of his day.</p>
+      </div>
+      <div class="artist-card">
+        <p class="artist-era">b. 1965</p>
+        <h3 class="artist-name">Ilona Németh</h3>
+        <p class="artist-desc">Contemporary conceptual artist whose installations explore identity, memory, and Central European political history. She represented Slovakia at the Venice Biennale in 2019.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="quote-block">
+    <blockquote>
+      "Slovak art is not merely decoration — it is memory. Every carved lintel and painted icon carries a whole world that could not be written down."
+      <cite>— Ján Alberty, art historian, 1962</cite>
+    </blockquote>
+  </div>
+
+  <section class="section">
+    <p class="section-num">03 — Movements</p>
+    <h2>How the Work<br><em>Changed</em></h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-year">14c–17c</div>
+        <div class="timeline-content">
+          <h3>Gothic & Renaissance</h3>
+          <p>Panel paintings, carved altarpieces, and fresco cycles dominate. The Spiš school produces work of European significance. Bratislava (then Pressburg) develops a court culture under the Habsburgs.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">18c–19c</div>
+        <div class="timeline-content">
+          <h3>National Awakening</h3>
+          <p>As pan-Slavic consciousness grows, artists begin self-consciously documenting folk culture. Romantic landscape painting and ethnographic illustration become politically charged acts of cultural preservation.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1918–1948</div>
+        <div class="timeline-content">
+          <h3>Czechoslovak Modernism</h3>
+          <p>Independence opens a flood of avant-garde influence. Fulla and Galanda introduce Post-Impressionist and Cubist approaches. The tension between European abstraction and national folk imagery becomes the defining creative problem.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1948–1989</div>
+        <div class="timeline-content">
+          <h3>Socialist Realism & Underground</h3>
+          <p>Official art is conscripted into propaganda. Beneath the surface, underground movements flourish — conceptual work, performance, and unofficial exhibitions held in private apartments sustain an alternative culture.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">1989–now</div>
+        <div class="timeline-content">
+          <h3>Contemporary Plurality</h3>
+          <p>The Velvet Revolution breaks the dam. Slovak artists engage international discourse — installation, video, new media — while many continue working through the unresolved questions of national identity and collective memory that history left behind.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="border-bottom:none;">
+    <p class="section-num">04 — Folk Tradition</p>
+    <h2>The <em>Living</em> Vernacular</h2>
+    <p>Alongside the fine art tradition runs a continuous folk practice of extraordinary vitality. Slovak folk art encompasses painted furniture, embroidered costumes, ceramic pottery, woven textiles, and architectural woodcarving — each region with its own distinct formal vocabulary.</p>
+    <p>The Čičmany village in the Strážov Hills preserves a tradition of geometric white-painted decoration on log houses, a pattern so distinctive it was adopted as a motif in Slovak design broadly. In the east, Ruthenian icon painting produced devotional images of haunting directness — flat, hieratic, yet intensely present.</p>
+    <p>Contemporary designers and artists continue returning to these sources — not as nostalgic revival but as living material, a counterweight to the frictionless globalism of digital culture.</p>
+  </section>
+
+  <div class="footer">
+    <p>An experimental page — part of an ongoing curiosity about Central European visual culture.</p>
+  </div>
+
+</div>
+
+<script>
+  // ── ROCK PHYSICS ──────────────────────────────────────────
+  const rock = document.getElementById('rock');
+  const hint = document.getElementById('rock-hint');
+
+  // initial position
+  let px = window.innerWidth  * 0.72;
+  let py = window.innerHeight * 0.18;
+
+  // velocity
+  let vx = 1.4, vy = 0.9;
+
+  // rotation
+  let angle = 12;
+  let omega = 0.18; // degrees/frame
+
+  // drag state
+  let dragging = false;
+  let dragOffX = 0, dragOffY = 0;
+  let lastMouseX = 0, lastMouseY = 0;
+  let dragVX = 0, dragVY = 0;
+
+  const W = () => window.innerWidth;
+  const H = () => window.innerHeight;
+  const RW = 180, RH = 155;
+
+  function place() {
+    rock.style.left = px + 'px';
+    rock.style.top  = py + 'px';
+    rock.style.transform = `rotate(${angle}deg)`;
+  }
+
+  function bounce() {
+    if (px < 0)          { px = 0;          vx = Math.abs(vx) * 0.82; omega = -omega * 0.9; }
+    if (px + RW > W())   { px = W() - RW;   vx = -Math.abs(vx) * 0.82; omega = -omega * 0.9; }
+    if (py < 0)          { py = 0;           vy = Math.abs(vy) * 0.82; }
+    if (py + RH > H())   { py = H() - RH;   vy = -Math.abs(vy) * 0.82; omega = -omega * 0.7; }
+  }
+
+  // very gentle gravity + air resistance
+  const GRAVITY = 0.04;
+  const DRAG    = 0.9985;
+
+  function tick() {
+    if (!dragging) {
+      vy += GRAVITY;
+      vx *= DRAG;
+      vy *= DRAG;
+
+      px += vx;
+      py += vy;
+      angle += omega;
+      omega *= 0.9995;
+
+      bounce();
+    }
+    place();
+    requestAnimationFrame(tick);
+  }
+
+  // ── DRAG ─────────────────────────────────────────────────
+  rock.addEventListener('mousedown', e => {
+    dragging = true;
+    dragOffX = e.clientX - px;
+    dragOffY = e.clientY - py;
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+    e.preventDefault();
+
+    // hide hint
+    hint.style.opacity = '0';
+  });
+
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    dragVX = e.clientX - lastMouseX;
+    dragVY = e.clientY - lastMouseY;
+    lastMouseX = e.clientX;
+    lastMouseY = e.clientY;
+    px = e.clientX - dragOffX;
+    py = e.clientY - dragOffY;
+  });
+
+  window.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false;
+    vx = dragVX * 0.95;
+    vy = dragVY * 0.95;
+    omega = dragVX * 0.25;
+  });
+
+  // ── TOUCH ─────────────────────────────────────────────────
+  rock.addEventListener('touchstart', e => {
+    dragging = true;
+    const t = e.touches[0];
+    dragOffX = t.clientX - px;
+    dragOffY = t.clientY - py;
+    lastMouseX = t.clientX;
+    lastMouseY = t.clientY;
+    hint.style.opacity = '0';
+    e.preventDefault();
+  }, { passive: false });
+
+  window.addEventListener('touchmove', e => {
+    if (!dragging) return;
+    const t = e.touches[0];
+    dragVX = t.clientX - lastMouseX;
+    dragVY = t.clientY - lastMouseY;
+    lastMouseX = t.clientX;
+    lastMouseY = t.clientY;
+    px = t.clientX - dragOffX;
+    py = t.clientY - dragOffY;
+  });
+
+  window.addEventListener('touchend', () => {
+    if (!dragging) return;
+    dragging = false;
+    vx = dragVX * 0.95;
+    vy = dragVY * 0.95;
+    omega = dragVX * 0.25;
+  });
+
+  place();
+  tick();
+</script>
+</body>
+</html>
