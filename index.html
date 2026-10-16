@@ -240,6 +240,83 @@
   .pillar p { font-size: .97rem; line-height: 1.9; color: var(--ink-soft); }
   .pillar hr { border:0; border-top:1px solid var(--rule); margin: 0 0 1.8rem; }
 
+  /* ─────────── THE PEAK (3D) ─────────── */
+  .peak { position: relative; height: 620vh; }
+  .peak-stage {
+    position: sticky; top: 0; height: 100vh; overflow: hidden;
+    background: var(--paper);
+  }
+  #peak-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+  /* paper mist — keeps the text legible and dissolves the terrain edge */
+  .peak-stage::before,
+  .peak-stage::after { content: ''; position: absolute; pointer-events: none; z-index: 1; }
+  .peak-stage::before {
+    inset: 0;
+    background: linear-gradient(97deg,
+      var(--paper) 0%,
+      rgba(247,244,237,.95) 24%,
+      rgba(247,244,237,.55) 42%,
+      rgba(247,244,237,0) 60%);
+  }
+  .peak-stage::after {
+    left: 0; right: 0; bottom: 0; height: 34%;
+    background: linear-gradient(to bottom, rgba(247,244,237,0), var(--paper) 88%);
+  }
+
+  .peak-ui { position: absolute; inset: 0; pointer-events: none; z-index: 2; }
+
+  .peak-eyebrow {
+    position: absolute; top: 8.5rem; left: 6vw;
+    opacity: 0; transition: opacity .9s ease .2s;
+  }
+  .peak.live .peak-eyebrow { opacity: 1; }
+
+  .peak-panels {
+    position: absolute; left: 6vw; top: 50%;
+    width: min(27rem, 40vw); transform: translateY(-50%);
+  }
+  .peak-panel {
+    position: absolute; left: 0; top: 50%; width: 100%;
+    transform: translateY(-46%) translateY(var(--lift, 0px));
+    opacity: 0; will-change: opacity, transform;
+  }
+  .peak-num {
+    font-family: 'Caveat', cursive; font-size: 1.5rem;
+    color: var(--ink-ghost); display: block; margin-bottom: .7rem;
+  }
+  .peak-panel h3 { font-size: clamp(2.1rem, 3.4vw, 3rem); font-weight: 600; line-height: 1.08; }
+  .peak-panel p {
+    margin-top: 1.3rem; font-size: 1rem; line-height: 1.95;
+    color: var(--ink-soft); max-width: 34ch;
+  }
+
+  .peak-dots {
+    position: absolute; right: 6vw; top: 50%; transform: translateY(-50%);
+    list-style: none; text-align: right;
+    opacity: 0; transition: opacity .9s ease;
+  }
+  .peak.live .peak-dots { opacity: 1; }
+  .peak-dots li {
+    font-family: 'Caveat', cursive; font-size: 1.05rem;
+    color: var(--ink-ghost); padding: .42rem 0;
+    transition: color .5s ease, transform .5s cubic-bezier(.22,1,.3,1);
+  }
+  .peak-dots li.on { color: var(--ink); transform: translateX(-7px); }
+
+  /* no-webgl fallback — stack the panels as plain text */
+  .peak.flat { height: auto; }
+  .peak.flat .peak-stage { position: static; height: auto; padding: 9rem 0; }
+  .peak.flat #peak-canvas, .peak.flat .peak-dots { display: none; }
+  .peak.flat .peak-ui { position: static; }
+  .peak.flat .peak-eyebrow { position: static; opacity: 1; display: block; margin: 0 6vw 3.5rem; }
+  .peak.flat .peak-panels {
+    position: static; transform: none; width: auto;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 4rem; padding: 0 6vw;
+  }
+  .peak.flat .peak-panel { position: static; transform: none; opacity: 1; }
+
   /* ─────────── PINNED SCROLL ─────────── */
   .reel { position: relative; height: 420vh; }
   .reel-stage {
@@ -337,6 +414,25 @@
 
   /* ─────────── RESPONSIVE ─────────── */
   @media (max-width: 1000px) {
+    /* the peak drops its side column — text sits under the summit instead */
+    .peak { height: 540vh; }
+    .peak-eyebrow { top: 7rem; }
+    .peak-panels {
+      left: 6vw; right: 6vw; width: auto;
+      top: auto; bottom: 9vh; transform: none;
+    }
+    .peak-panel {
+      top: auto; bottom: 0;
+      transform: translateY(var(--lift, 0px));
+    }
+    .peak-panel p { max-width: none; }
+    .peak-dots { display: none; }
+    .peak-stage::before {
+      background: linear-gradient(to top,
+        var(--paper) 4%, rgba(247,244,237,.93) 32%, rgba(247,244,237,0) 66%);
+    }
+    .peak-stage::after { height: 52%; }
+
     .split, .ranges-grid, .founders, .foot-grid { grid-template-columns: 1fr; gap: 3.5rem; }
     .split { padding: 7rem 6vw; }
     .split.flip .split-media { order: 0; }
@@ -432,31 +528,49 @@
   </div>
 </section>
 
-<!-- ───────── PILLARS ───────── -->
-<section id="pillars">
-  <div class="pillars-head rise">
-    <span class="eyebrow">What we do</span>
-    <h2 class="hand" style="margin-top:1.4rem">Three ways<br>of keeping.</h2>
-    <p class="lede">Ecology, culture and community — a mountain cannot be held onto unless the traditions and people that define it are held onto first.</p>
-  </div>
-  <div class="pillars">
-    <div class="pillar rise d1">
-      <hr>
-      <span class="pnum">01</span>
-      <h3>Ground &amp; water</h3>
-      <p>Restoring alpine meadow, peat bog and forest corridor worn down by climate shift and heavy use — alongside the ecologists, foresters and farmers already there.</p>
-    </div>
-    <div class="pillar rise d2">
-      <hr>
-      <span class="pnum">02</span>
-      <h3>Language &amp; craft</h3>
-      <p>Recording dialect, pastoral practice, timber building and hand skill. Culture here is not an archive to be filed — it is something still in use, and it needs using.</p>
-    </div>
-    <div class="pillar rise d3">
-      <hr>
-      <span class="pnum">03</span>
-      <h3>People who stay</h3>
-      <p>Teaching guides, schoolteachers and village councils to carry this themselves. Nothing we do outlasts us unless the people closest to the land are holding it.</p>
+<!-- ───────── THE PEAK (3D) ───────── -->
+<section class="peak" id="peak">
+  <div class="peak-stage">
+    <canvas id="peak-canvas" aria-hidden="true"></canvas>
+
+    <div class="peak-ui">
+      <span class="eyebrow peak-eyebrow">What we do</span>
+
+      <div class="peak-panels">
+        <article class="peak-panel" data-st="0">
+          <span class="peak-num">I</span>
+          <h3 class="hand">One massif,<br>many faces.</h3>
+          <p>Every slope asks for something different. These are the four we work on — and a mountain is only held if all four are.</p>
+        </article>
+
+        <article class="peak-panel" data-st="1">
+          <span class="peak-num">II</span>
+          <h3 class="hand">Ground &amp; water</h3>
+          <p>Restoring alpine meadow, peat bog and forest corridor worn down by climate shift and heavy use — alongside the ecologists, foresters and farmers already there.</p>
+        </article>
+
+        <article class="peak-panel" data-st="2">
+          <span class="peak-num">III</span>
+          <h3 class="hand">Language &amp; craft</h3>
+          <p>Recording dialect, pastoral practice, timber building and hand skill. Culture here is not an archive to be filed — it is something still in use, and it needs using.</p>
+        </article>
+
+        <article class="peak-panel" data-st="3">
+          <span class="peak-num">IV</span>
+          <h3 class="hand">People who stay</h3>
+          <p>Teaching guides, schoolteachers and village councils to carry this themselves. Nothing we do outlasts us unless the people closest to the land are holding it.</p>
+        </article>
+
+        <article class="peak-panel" data-st="4">
+          <span class="peak-num">V</span>
+          <h3 class="hand">And then,<br>the whole of it.</h3>
+          <p>Ecology, culture and community are one system seen from three sides. Step back far enough and there is only the mountain, and the people on it.</p>
+        </article>
+      </div>
+
+      <ol class="peak-dots" aria-hidden="true">
+        <li>I</li><li>II</li><li>III</li><li>IV</li><li>V</li>
+      </ol>
     </div>
   </div>
 </section>
@@ -646,6 +760,246 @@
   addEventListener('scroll', () => { if (!queued) { requestAnimationFrame(tick); queued = true; } }, { passive: true });
   addEventListener('resize', tick);
   tick();
+</script>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+
+const section = document.getElementById('peak');
+const canvas  = document.getElementById('peak-canvas');
+const panels  = [...document.querySelectorAll('.peak-panel')];
+const dots    = [...document.querySelectorAll('.peak-dots li')];
+
+const PAPER = 0xf7f4ed;
+const clamp = (v,a,b) => Math.min(Math.max(v,a),b);
+const lerp  = (a,b,t) => a + (b-a)*t;
+const smooth = (e0,e1,x) => { const t = clamp((x-e0)/(e1-e0),0,1); return t*t*(3-2*t); };
+const easeIO = t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+
+/* ── camera stations: one per slope ─────────────────────────────── */
+const STATIONS = [
+  { az: 0.55, el: 0.20, dist: 4.35, ty: 0.26 },  // wide establishing
+  { az: 2.05, el: 0.46, dist: 2.25, ty: 0.64 },  // upper ridge, close
+  { az: 3.55, el: 0.26, dist: 2.60, ty: 0.44 },  // north face
+  { az: 5.05, el: 0.11, dist: 2.95, ty: 0.17 },  // down in the valley
+  { az: 6.35, el: 0.70, dist: 4.20, ty: 0.52 },  // high and back out
+];
+
+/* scroll timeline: hold on a station, travel, hold, travel … */
+const HOLD = 1, TRAVEL = 1.25, segs = [];
+for (let i = 0; i < STATIONS.length; i++) {
+  segs.push({ hold:true, a:i, b:i, w:HOLD });
+  if (i < STATIONS.length-1) segs.push({ hold:false, a:i, b:i+1, w:TRAVEL });
+}
+const totalW = segs.reduce((s,x)=>s+x.w, 0);
+let acc = 0;
+for (const s of segs) { s.t0 = acc/totalW; acc += s.w; s.t1 = acc/totalW; }
+
+function sampleTimeline(t) {
+  t = clamp(t, 0, 1);
+  for (let i = 0; i < segs.length; i++) {
+    const s = segs[i];
+    if (t <= s.t1 || i === segs.length-1) {
+      const local = (t - s.t0) / (s.t1 - s.t0);
+      return { s, local: clamp(local,0,1) };
+    }
+  }
+}
+
+/* ── no WebGL? fall back to plain stacked text ──────────────────── */
+function hasWebGL() {
+  try {
+    const c = document.createElement('canvas');
+    return !!(window.WebGLRenderingContext && (c.getContext('webgl2') || c.getContext('webgl')));
+  } catch { return false; }
+}
+if (!hasWebGL()) { section.classList.add('flat'); throw new Error('no webgl'); }
+
+/* ── value/perlin noise ─────────────────────────────────────────── */
+const perm = new Uint8Array(512);
+{
+  const p = [...Array(256).keys()];
+  let s = 1337;
+  const rnd = () => { s = (s*1664525 + 1013904223) >>> 0; return s/4294967296; };
+  for (let i = 255; i > 0; i--) { const j = (rnd()*(i+1))|0; [p[i],p[j]] = [p[j],p[i]]; }
+  for (let i = 0; i < 512; i++) perm[i] = p[i & 255];
+}
+const fade = t => t*t*t*(t*(t*6-15)+10);
+function grad(h,x,y){ switch(h&3){ case 0: return x+y; case 1: return -x+y; case 2: return x-y; default: return -x-y; } }
+function noise2(x,y) {
+  const Xi = Math.floor(x), Yi = Math.floor(y);
+  const X = Xi & 255, Y = Yi & 255;
+  const xf = x - Xi, yf = y - Yi;
+  const u = fade(xf), v = fade(yf);
+  const aa = perm[perm[X]+Y],   ba = perm[perm[X+1]+Y];
+  const ab = perm[perm[X]+Y+1], bb = perm[perm[X+1]+Y+1];
+  const x1 = lerp(grad(aa,xf,yf),   grad(ba,xf-1,yf),   u);
+  const x2 = lerp(grad(ab,xf,yf-1), grad(bb,xf-1,yf-1), u);
+  return lerp(x1, x2, v) * 0.5;
+}
+/* ridged multifractal — gives sharp crests rather than rolling blobs */
+function ridged(x, y, oct) {
+  let f = 1, a = 0.5, sum = 0, norm = 0;
+  for (let i = 0; i < oct; i++) {
+    let n = 1 - Math.abs(noise2(x*f, y*f)) * 2;
+    n *= n;
+    sum += n*a; norm += a;
+    f *= 2.03; a *= 0.5;
+  }
+  return sum/norm;
+}
+
+const PEAK_H = 1.3, SPAN = 4.4;
+function heightAt(u, v) {              // u,v in −1..1
+  const r = Math.hypot(u, v);
+  const cone = Math.pow(Math.max(0, 1 - r), 1.4);
+  if (cone <= 0) return 0;
+  const rg   = ridged(u*1.85 + 11, v*1.85 - 5, 6);
+  const roll = noise2(u*1.1 - 3, v*1.1 + 7);
+  return Math.max(0, cone * (0.42 + 0.72*rg + 0.2*roll)) * PEAK_H;
+}
+
+/* ── scene ──────────────────────────────────────────────────────── */
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true, powerPreference:'high-performance' });
+renderer.setClearAlpha(0);
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.Fog(PAPER, 3.4, 7.2);
+
+const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+
+const SEG = matchMedia('(max-width: 900px)').matches ? 190 : 330;
+const geo = new THREE.PlaneGeometry(SPAN, SPAN, SEG, SEG);
+geo.rotateX(-Math.PI/2);
+
+const pos = geo.attributes.position;
+const colors = new Float32Array(pos.count * 3);
+const cLow   = new THREE.Color('#ded6c6');   // bare ground, warm
+const cHigh  = new THREE.Color('#ffffff');   // snow
+const cPaper = new THREE.Color('#f7f4ed');   // the page itself
+const e = 1/SEG;
+
+for (let i = 0; i < pos.count; i++) {
+  const u = pos.getX(i)/(SPAN/2), v = pos.getZ(i)/(SPAN/2);
+  const rad = Math.hypot(u, v);
+  let h = heightAt(u, v);
+  // beyond the foot, the skirt falls away so no flat plate is ever in frame
+  h -= smooth(0.96, 1.45, rad) * 1.1;
+  pos.setY(i, h);
+
+  // slope from the height field — steep faces shed snow, flats keep it
+  const gx = heightAt(u+e, v) - heightAt(u-e, v);
+  const gz = heightAt(u, v+e) - heightAt(u, v-e);
+  const slope = Math.hypot(gx, gz) / (2*e*(SPAN/2));
+  const steep = smooth(0.55, 1.7, slope);
+
+  const snow = smooth(0.26, 0.70, Math.max(0,h)/PEAK_H) * (1 - steep*0.74);
+  let r = lerp(cLow.r, cHigh.r, snow);
+  let g = lerp(cLow.g, cHigh.g, snow);
+  let b = lerp(cLow.b, cHigh.b, snow);
+
+  // dissolve the outskirts into the paper
+  const gone = smooth(0.62, 1.0, rad);
+  r = lerp(r, cPaper.r, gone);
+  g = lerp(g, cPaper.g, gone);
+  b = lerp(b, cPaper.b, gone);
+
+  colors[i*3] = r; colors[i*3+1] = g; colors[i*3+2] = b;
+}
+geo.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+geo.computeVertexNormals();
+
+const mountain = new THREE.Mesh(
+  geo,
+  new THREE.MeshStandardMaterial({ vertexColors:true, roughness:0.97, metalness:0, flatShading:false })
+);
+scene.add(mountain);
+
+scene.add(new THREE.HemisphereLight(0xffffff, 0xeae3d4, 1.05));
+const key = new THREE.DirectionalLight(0xffffff, 1.7);
+key.position.set(-3.4, 5.2, 2.6);
+scene.add(key);
+const fill = new THREE.DirectionalLight(0xfff8ec, 0.5);
+fill.position.set(3.6, 1.6, -3.0);
+scene.add(fill);
+
+/* ── sizing ─────────────────────────────────────────────────────── */
+function resize() {
+  const w = canvas.clientWidth || innerWidth;
+  const h = canvas.clientHeight || innerHeight;
+  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setSize(w, h, false);
+  camera.aspect = w/h;
+  camera.updateProjectionMatrix();
+}
+new ResizeObserver(resize).observe(canvas);
+resize();
+
+/* ── scroll → camera ────────────────────────────────────────────── */
+const target = new THREE.Vector3();
+let want = 0, have = 0, visible = false;
+
+new IntersectionObserver(es => {
+  visible = es[0].isIntersecting;
+  section.classList.toggle('live', visible);
+}, { rootMargin: '10% 0px' }).observe(section);
+
+function readScroll() {
+  const r = section.getBoundingClientRect();
+  const span = section.offsetHeight - innerHeight;
+  want = clamp(-r.top / span, 0, 1);
+}
+addEventListener('scroll', readScroll, { passive: true });
+addEventListener('resize', readScroll);
+readScroll();
+have = want;
+
+const slow = matchMedia('(prefers-reduced-motion: reduce)').matches ? 1 : 0.075;
+
+function place(t) {
+  const { s, local } = sampleTimeline(t);
+  const p = s.hold ? 0 : easeIO(local);
+  const A = STATIONS[s.a], B = STATIONS[s.b];
+
+  const az = lerp(A.az, B.az, p);
+  const el = lerp(A.el, B.el, p);
+  const d  = lerp(A.dist, B.dist, p);
+  const ty = lerp(A.ty, B.ty, p);
+
+  target.set(0, ty, 0);
+  camera.position.set(
+    Math.cos(el) * Math.cos(az) * d,
+    ty + Math.sin(el) * d,
+    Math.cos(el) * Math.sin(az) * d
+  );
+  camera.lookAt(target);
+
+  // panels only while the camera is parked on a slope
+  const active = s.hold ? s.a : -1;
+  const alpha  = s.hold ? smooth(0, .20, local) * (1 - smooth(.80, 1, local)) : 0;
+
+  panels.forEach((el2, i) => {
+    const on = i === active;
+    el2.style.opacity = on ? alpha : 0;
+    el2.style.setProperty('--lift', ((on ? 1-alpha : 1) * 14).toFixed(2) + 'px');
+  });
+  dots.forEach((d2, i) => d2.classList.toggle('on', i === (s.hold ? s.a : s.b)));
+}
+
+function loop() {
+  requestAnimationFrame(loop);
+  if (!visible) return;
+  have += (want - have) * slow;
+  place(have);
+  mountain.rotation.y = have * 0.22;   // the massif turns very slightly as you go
+  renderer.render(scene, camera);
+}
+place(0);
+loop();
 </script>
 </body>
 </html>
